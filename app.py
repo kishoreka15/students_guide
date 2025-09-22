@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -30,6 +30,7 @@ streams = {
 @app.route('/')
 def home():
     return render_template('home.html')
+
 
 @app.route('/tenth', methods=['GET', 'POST'])
 def tenth():
@@ -70,6 +71,7 @@ def tenth():
 
     return render_template('tenth.html')
 
+
 @app.route('/twelfth', methods=['GET', 'POST'])
 def twelfth():
     if request.method == 'POST':
@@ -100,5 +102,9 @@ def twelfth():
             departments.append('Social Sciences')
 
         return render_template('twelfth.html', departments=departments)
-    
-app.run(host='0.0.0.0',port=8080)
+
+    return render_template('twelfth.html')
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080, debug=True)
