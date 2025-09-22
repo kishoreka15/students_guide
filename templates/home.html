@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sir Issac Newton College - Student Guidance Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; background: #f9fafb; }
+    .banner-img { width: 100%; height: auto; object-fit: cover; }
+    .typewriter { overflow: hidden; border-right: .15em solid #3b82f6; white-space: nowrap; animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #3b82f6; } }
+
+    /* Moving Background */
+    .moving-bg { background: #111; overflow: hidden; white-space: nowrap; height: 50px; display: flex; align-items: center; }
+    .scrolling-text { display: inline-block; color: #fff; font-weight: bold; font-size: 1.25rem; padding-left: 100%; animation: scroll-text 15s linear infinite; }
+    @keyframes scroll-text {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Banner Image -->
+  <div>
+    <img src="https://share.google/images/r7oylxf4J8WW0Tb3E" alt="Sir Issac Newton College Banner" class="banner-img">
+  </div>
+
+  <!-- Navigation -->
+  <nav class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+          <i class="fas fa-school text-white"></i>
+        </div>
+        <div>
+          <div class="font-semibold text-gray-800">Sir Issac Newton College of Engineering and Technology</div>
+          <div class="text-sm text-blue-600">Student Guidance Portal</div>
+        </div>
+      </div>
+      <a href="#recommendation" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- Moving Background -->
+  <div class="moving-bg">
+    <div class="scrolling-text">
+      PANASONIC — AV DIGITAL WORLD — CREATIVE STUDENT GUIDANCE PORTAL — SIR ISSAC NEWTON COLLEGE — 
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <!-- Video Background -->
+<div class="relative w-full h-screen overflow-hidden">
+  <video autoplay muted loop class="absolute w-full h-full object-cover">
+    <source src="https://www.videezy.com/download/123456/students-study-loop.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Overlay content -->
+  <div class="relative z-10 flex flex-col justify-center items-center h-full text-center text-white px-4 bg-black/30">
+    <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome New Students</h1>
+    <p class="text-xl md:text-2xl mb-6 typewriter">Helping you choose the right stream and college departments for 10th & 12th</p>
+    <div class="flex gap-4">
+      <a href="#recommendation" class="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 transition">Get Recommendation</a>
+      <a href="#about" class="border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition">About Us</a>
+    </div>
+  </div>
+</div>
+
+    <h1 class="text-3xl md:text-5xl font-bold mb-4">Welcome New Students</h1>
+    <p class="text-lg md:text-2xl mb-6 typewriter">Helping you choose the right stream and college departments for 10th & 12th</p>
+    <div class="flex justify-center gap-4">
+      <a href="#recommendation" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Get Recommendation</a>
+      <a href="#about" class="border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition">About Us</a>
+    </div>
+  </section>
+
+  <!-- Recommendation Section -->
+  <section id="recommendation" class="max-w-4xl mx-auto px-4 py-16">
+    <h2 class="text-2xl md:text-3xl font-bold text-center mb-8">Find Your Stream / Department</h2>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- 10th Recommendation -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-4">10th Standard Stream Recommendation</h3>
+        <p class="mb-4 text-gray-700">Enter your marks and interests to find the best stream for your higher studies.</p>
+        <a href="tenth.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition inline-block">Go to 10th Stream Recommendation</a>
+        <img src="https://images.unsplash.com/photo-1581092580490-f6a8e91b75d0?auto=format&fit=crop&w=600&q=80" alt="Student studying" class="mt-4 rounded-lg w-full h-48 object-cover">
+      </div>
+
+      <!-- 12th Recommendation -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="font-semibold text-xl mb-4">12th Standard Department Recommendation</h3>
+        <p class="mb-4 text-gray-700">Enter your marks to see eligible college departments based on your 12th standard performance.</p>
+        <a href="twelfth.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition inline-block">Go to 12th Department Recommendation</a>
+        <img src="https://images.unsplash.com/photo-1605902711622-cfb43c443f0f?auto=format&fit=crop&w=600&q=80" alt="College classroom" class="mt-4 rounded-lg w-full h-48 object-cover">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-gray-50 py-16">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">About This Application</h2>
+      <p class="text-gray-700 mb-4">This student guidance portal is created by <strong>Sir Issac Newton College of Engineering and Technology, Nagapattinam, Papakovil</strong>. It helps new 10th and 12th students choose their streams and eligible college departments based on marks and interests.</p>
+      <img src="https://images.unsplash.com/photo-1596496056917-6a8f0a6bfa3e?auto=format&fit=crop&w=800&q=80" alt="Guidance" class="mt-6 rounded-lg mx-auto w-full h-64 object-cover">
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-8 text-center">
+    <p>&copy;  Sir Issac Newton College . All rights reserved.</p>
+    <p class="text-sm mt-2">Powered by Student Guidance Portal</p>
+  </footer>
+</body>
+</html>
