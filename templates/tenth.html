@@ -1,150 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10th Stream Recommendation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='static.css') }}">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #e0f7fa, #c8e6f9);
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 700px;
-            margin: 40px auto;
-            padding: 20px;
-        }
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            font-size: 2.5em;
-            color: #1e40af;
-        }
-        .header p {
-            font-size: 1.1em;
-            color: #374151;
-        }
-        .form {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #d1d5db;
-            box-sizing: border-box;
-        }
-        .interest-group {
-            margin-bottom: 15px;
-        }
-        .form-actions {
-            text-align: center;
-            margin-top: 25px;
-        }
-        .btn {
-            display: inline-block;
-            background: #1e40af;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            text-decoration: none;
-            margin: 5px;
-            transition: background 0.3s, transform 0.2s;
-        }
-        .btn:hover {
-            background: #2563eb;
-            transform: translateY(-3px);
-        }
-        .btn-secondary {
-            background: #6b7280;
-        }
-        .btn-secondary:hover {
-            background: #4b5563;
-        }
-        .result {
-            background: #f0fff4;
-            border: 1px solid #10b981;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 25px;
-            text-align: center;
-        }
-        .result h2 {
-            color: #059669;
-            margin-bottom: 15px;
-        }
-        .result p {
-            margin: 5px 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10th Recommendation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1>10th Stream Recommendation</h1>
-            <p>Tell us about your interests and current performance</p>
-        </header>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-3xl font-bold mb-6">10th Standard Stream Recommendation</h1>
 
-        <form method="POST" class="form">
-            <div class="form-group">
-                <label for="current_marks">Current 10th Standard Marks (%)</label>
-                <input type="number" id="current_marks" name="current_marks" min="0" max="100" required>
-            </div>
+  <form method="POST" class="bg-white p-6 rounded-lg shadow max-w-lg mx-auto">
+    <label class="block mb-2">Maths Interest (1-5)</label>
+    <input type="number" name="maths_interest" min="1" max="5" required class="border p-2 w-full mb-4">
 
-            <div class="form-group">
-                <label>Rate your interest in these subjects (1-5):</label>
-                <div class="interest-group">
-                    <label>Mathematics</label>
-                    <input type="number" name="maths_interest" min="1" max="5" required>
-                </div>
-                <div class="interest-group">
-                    <label>Science (Physics/Chemistry)</label>
-                    <input type="number" name="science_interest" min="1" max="5" required>
-                </div>
-                <div class="interest-group">
-                    <label>Biology</label>
-                    <input type="number" name="bio_interest" min="1" max="5" required>
-                </div>
-                <div class="interest-group">
-                    <label>Commerce/Accounts</label>
-                    <input type="number" name="commerce_interest" min="1" max="5" required>
-                </div>
-            </div>
+    <label class="block mb-2">Science Interest (1-5)</label>
+    <input type="number" name="science_interest" min="1" max="5" required class="border p-2 w-full mb-4">
 
-            <div class="form-actions">
-                <a href="{{ url_for('home') }}" class="btn btn-secondary">Back</a>
-                <button type="submit" class="btn">Get Recommendation</button>
-            </div>
-        </form>
+    <label class="block mb-2">Biology Interest (1-5)</label>
+    <input type="number" name="bio_interest" min="1" max="5" required class="border p-2 w-full mb-4">
 
-        {% if recommended %}
-            <div class="result">
-                <h2>Recommended Stream: {{ stream_info.name if stream_info else recommended }}</h2>
-                {% if stream_info %}
-                    <p>{{ stream_info.description }}</p>
-                    <p><strong>Subjects:</strong> {{ stream_info.subjects|join(', ') }}</p>
-                    <p><strong>Career Paths:</strong> {{ stream_info.careers|join(', ') }}</p>
-                    <p><strong>Minimum Marks Required:</strong> {{ stream_info.min_marks }}%</p>
-                {% endif %}
-            </div>
-        {% endif %}
-    </div>
+    <label class="block mb-2">Commerce Interest (1-5)</label>
+    <input type="number" name="commerce_interest" min="1" max="5" required class="border p-2 w-full mb-4">
+
+    <label class="block mb-2">Current Marks (%)</label>
+    <input type="number" name="current_marks" min="0" max="100" required class="border p-2 w-full mb-4">
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Get Recommendation</button>
+  </form>
+
+  {% if recommended %}
+  <div class="mt-8 bg-white p-6 rounded-lg shadow max-w-lg mx-auto">
+    <h2 class="text-2xl font-bold">Recommendation: {{ stream_info.name if stream_info else recommended }}</h2>
+    {% if stream_info %}
+      <p class="mt-2">{{ stream_info.description }}</p>
+      <p class="mt-2"><strong>Subjects:</strong> {{ stream_info.subjects|join(', ') }}</p>
+      <p class="mt-2"><strong>Careers:</strong> {{ stream_info.careers|join(', ') }}</p>
+    {% endif %}
+  </div>
+  {% endif %}
 </body>
 </html>

@@ -3,161 +3,253 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sir Issac Newton College - Student Guidance Portal</title>
+  <title>Sir Issac Newton Educational Institutions </title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    body { font-family: 'Montserrat', sans-serif; background: #f9fafb; }
+    body { font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: #fff; }
 
-    .typewriter { 
-      overflow: hidden; 
-      border-right: .15em solid #3b82f6; 
-      white-space: nowrap; 
-      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite; 
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    /* Hero animation for planets */
+    .planet-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 2rem 0; }
+    .planet { flex: 0 0 80%; scroll-snap-align: center; border-radius: 1rem; background: #111; padding: 2rem; text-align: center; transition: transform 0.5s; }
+    .planet img { width: 200px; height: 200px; object-fit: cover; margin-bottom: 1rem; border-radius: 50%; animation: spin 20s linear infinite; }
+    .planet:hover { transform: scale(1.05); }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    /* Hero heading */
+    .hero-title { font-size: 2.5rem; font-weight: 700; }
+    .hero-subtitle { font-size: 1.25rem; margin-top: 1rem; color: #facc15; }
+
+    /* Call-to-action buttons */
+    .btn-primary { background-color: #3b82f6; color: #fff; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: background 0.3s; text-decoration: none; display: inline-block; }
+    .btn-primary:hover { background-color: #2563eb; }
+
+    .btn-outline { border: 2px solid #fff; color: #fff; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: all 0.3s; text-decoration: none; display: inline-block; }
+    .btn-outline:hover { background: #fff; color: #0a0a0a; }
+
+    /* Slideshow Styles for Hero/Banner Section */
+    .hero-slideshow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2; /* Behind content */
     }
-    @keyframes typing { from { width: 0 } to { width: 100% } }
-    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #3b82f6; } }
-
-    /* Moving Background */
-    .moving-bg { background: #111; overflow: hidden; white-space: nowrap; height: 50px; display: flex; align-items: center; }
-    .scrolling-text { display: inline-block; color: #fff; font-weight: bold; font-size: 1.25rem; padding-left: 100%; animation: scroll-text 15s linear infinite; }
-    @keyframes scroll-text { 0% { transform: translateX(0%); } 100% { transform: translateX(-100%); } }
-
-    /* 3D Animated Text Effect */
-    @keyframes text-3d {
-      0% { text-shadow: 2px 2px 0 #ff4d6d, 4px 4px 0 #4dff88, 6px 6px 0 #4db8ff; transform: rotateY(0deg); }
-      50% { text-shadow: 2px 2px 0 #4dff88, 4px 4px 0 #4db8ff, 6px 6px 0 #ff4d6d; transform: rotateY(10deg); }
-      100% { text-shadow: 2px 2px 0 #4db8ff, 4px 4px 0 #ff4d6d, 6px 6px 0 #4dff88; transform: rotateY(0deg); }
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 1s ease-in-out; /* Smooth fade */
     }
-    .animate-text-3d {
-      animation: text-3d 3s linear infinite;
-      perspective: 500px;
-      line-height: 1.2;
+    .hero-slide.active {
+      opacity: 1;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay for readability */
+      z-index: -1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10; /* On top of slideshow */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
     }
   </style>
 </head>
 <body>
   <!-- Navigation -->
-  <nav class="bg-white shadow-lg sticky top-0 z-50">
+  <nav class="bg-gray-900 shadow-lg sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-3">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-          <i class="fas fa-school text-white"></i>
+          <i class="fas fa-rocket text-white"></i>
         </div>
         <div>
-          <div class="font-semibold text-gray-800">Sir Issac Newton College of Engineering and Technology</div>
-          <div class="text-sm text-blue-600">Student Guidance Portal</div>
+          <div class="font-semibold text-white text-lg">Sir Issac Newton Educational Institutions - </div>
+          <div class="text-sm text-gray-300">Students guide</div>
         </div>
       </div>
-      <a href="#recommendation" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Get Started</a>
+      <a href="#planets" class="btn-primary">Get Started</a>
     </div>
   </nav>
 
-  <!-- Moving Background -->
-  <div class="moving-bg">
-    <div class="scrolling-text">
-       SIR ISSAC NEWTON COLLEGE — STUDENT PORTAL
-    </div>
-  </div>
+  <!-- Hero/Banner Section with Slideshow -->
+  <section class="relative h-screen flex flex-col justify-center items-center text-center px-4">
+    <!-- Slideshow Background -->
+    {% set img1 = url_for('static', filename='blog1.jpg') %}
+{% set img2 = url_for('static', filename='imagees.jpeg') %}
+{% set img3 = url_for('static', filename='images.jpeg') %}
+{% set img4 = url_for('static', filename='blog2.jpg') %}
 
-  <!-- Hero Section with 3D Text -->
-  <div class="relative w-full h-screen overflow-hidden">
-    <!-- Banner Image -->
-    <img src="{{ url_for('static', filename='blog2.jpg') }}" 
-     alt="College Banner" 
-     class="w-full h-48 md:h-64 lg:h-80 object-cover">
-<!--stlye-->
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sir Issac Newton College - Student Guidance Portal</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    .responsive-banner {
-      width: 100%;
-      height: 200px; /* default for mobile */
-      object-fit: cover;
-    }
-
-    @media (min-width: 768px) {
-      .responsive-banner {
-        height: 300px; /* tablet */
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .responsive-banner {
-        height: 400px; /* desktop */
-      }
-    }
-  </style>
-</head>
+<div class="hero-slide active" style="background-image: url('{{ img1 }}');"></div>
+<div class="hero-slide" style="background-image: url('{{ img2 }}');"></div>
+<div class="hero-slide" style="background-image: url('{{ img3 }}');"></div>
+<div class="hero-slide" style="background-image: url('{{ img4 }}');"></div>
 
 
 
-    <!-- Overlay Content -->
-    <div class="relative z-10 flex flex-col justify-center items-center h-full text-center px-4 bg-black/30">
-      <h1 class="text-5xl md:text-7xl font-bold text-white animate-text-3d mb-6">
-        Welcome Students<br>for SINCET GUIDE APP
-      </h1>
-      <p class="text-xl md:text-2xl text-yellow-300 typewriter mb-6">
-        Helping you choose the right stream and college departments for 10th & 12th
-      </p>
+    <!-- Dark Overlay for Readability -->
+    <div class="hero-overlay"></div>
+    <!-- Content Overlay -->
+    <div class="hero-content">
+      <h1 class="hero-title mb-4">welcome to Sir Issac Newton Educational Institutions </h1>
+      <p class="hero-subtitle mb-6">Students Guides Website.</p>
       <div class="flex gap-4">
-        <a href="#recommendation" class="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
-          Get Recommendation
-        </a>
-        <a href="#about" class="border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-blue-600 transition font-semibold">
-          About Us
-        </a>
+        <a href="#planets" class="btn-primary">Explore Our Institutions</a>
+        <a href="#about" class="btn-outline">Learn More</a>
       </div>
     </div>
+  </section>
+
+  <!-- Planetary Interactive Section -->
+  <section id="planets" class="py-16 bg-gradient-to-b from-black to-gray-900">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Our Educational Campus</h2>
+    <div class="planet-container max-w-6xl mx-auto px-4">
+      <!-- Planet 1 -->
+       <!-- Engineering Planet -->
+<div class="planet relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
+
+  <!-- Background Video -->
+<video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+  <source src="{{ url_for('static', filename='videos/mixkit-animation-of-futuristic-devices-99786-hd-ready.mp4') }}" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+  <!-- Fallback Image -->
+  <div class="video-fallback absolute w-full h-full top-0 left-0 z-0 hidden">
+    <img src="/static/images/Gemini_Generated_Image_fms5dgfms5dgfms5-removebg-preview.png" 
+         alt="Engineering Fallback" 
+         class="w-full h-full object-cover"
+         onerror="this.src='https://via.placeholder.com/320x384/1e3a8a/fff?text=Engineering';">
   </div>
 
-  <!-- Recommendation Section with Video Background -->
-  <section id="recommendation" class="relative w-full py-16">
-    <!-- Background Video -->
-    <video autoplay muted loop class="absolute w-full h-full object-cover top-0 left-0 z-0">
-      <source src="{{ url_for('static', filename='mixkit-students-walking-in-a-university-4519-hd-ready.mp4') }}" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
 
-    <!-- Overlay Content -->
-    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center text-white">
-      <h2 class="text-2xl md:text-3xl font-bold mb-8">Find Your Stream / Department</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <!-- 10th Recommendation -->
-        <div class="bg-black/60 p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h3 class="font-semibold text-xl mb-4">10th Standard Stream Recommendation</h3>
-          <p class="mb-4">Enter your marks and interests to find the best stream for your higher studies.</p>
-          <a href="tenth.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition inline-block">Go to 10th Stream Recommendation</a>
-        </div>
+  <!-- Content -->
+  <div class="relative z-20 text-white px-4">
+    <img src="/static/images/Gemini_Generated_Image_fms5dgfms5dgfms5-removebg-preview.png" 
+         alt="Engineering Icon" 
+         class="mx-auto w-40 h-40 object-cover rounded-full mb-4">
+    <h3 class="text-2xl font-bold mb-2">Engineering</h3>
+    <p class="text-lg max-w-xl mx-auto">
+      Engineering is the art of directing the great sources of power in nature for the use and convenience of man.
+    </p>
+  </div>
+</div>
 
-        <!-- 12th Recommendation -->
-        <div class="bg-black/60 p-6 rounded-xl shadow hover:shadow-lg transition">
-          <h3 class="font-semibold text-xl mb-4">12th Standard Department Recommendation</h3>
-          <p class="mb-4">Enter your marks to see eligible college departments based on your 12th standard performance.</p>
-          <a href="twelfth.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition inline-block">Go to 12th Department Recommendation</a>
-        </div>
+      <!-- Planet 2 -->
+      <div class="planet">
+        <img src="{{ url_for('static', filename='planets/mercury.jpg') }}" alt="Mercury">
+        <h3 class="text-xl font-semibold mb-2">Art & Science</h3>
+        <p>At Tamil Nadu’s premier Arts & Science colleges, we nurture talent, creativity, and innovation.</p>
+      </div>
+      <!-- Planet 3 -->
+      <div class="planet">
+        <img src="{{ url_for('static', filename='planets/venus.jpg') }}" alt="Venus">
+        <h3 class="text-xl font-semibold mb-2">Pharmacy</h3>
+        <p>Blending science, ethics, and compassion to create healthcare professionals of tomorrow.</p>
+      </div>
+      <!-- Planet 4 -->
+      <div class="planet">
+        <img src="{{ url_for('static', filename='planets/mars.jpg') }}" alt="Mars">
+        <h3 class="text-xl font-semibold mb-2">Law</h3>
+        <p>From classroom debates to courtroom excellence, we shape skilled advocates for society.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommendation Section -->
+  <section id="recommendation" class="py-20 bg-gray-900 text-white text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-10">Find Your Stream / Department</h2>
+
+    <div class="max-w-4xl mx-auto px-4 grid md:grid-cols-2 gap-8">
+      <!-- 10th Recommendation -->
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h3 class="font-semibold text-xl mb-4">10th Standard Stream Recommendation</h3>
+        <p class="mb-4">Enter your marks and interests to find the best stream for your higher studies.</p>
+        <a href="{{ url_for('tenth') }}" class="btn-primary inline-block">Go to 10th Recommendation</a>
+      </div>
+
+      <!-- 12th Recommendation -->
+      <div class="bg-gray-800 p-6 rounded-xl shadow">
+        <h3 class="font-semibold text-xl mb-4">12th Standard Department Recommendation</h3>
+        <p class="mb-4">Enter your marks to see eligible college departments based on your 12th performance.</p>
+        <a href="{{ url_for('twelfth') }}" class="btn-primary inline-block">Go to 12th Recommendation</a>
       </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="bg-gray-50 py-16">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-3xl font-bold mb-6">About This Application</h2>
-      <p class="text-gray-700 mb-4">This student guidance portal is created by <strong>Sir Issac Newton College of Engineering and Technology, Nagapattinam, Papakovil</strong>. It helps new 10th and 12th students choose their streams and eligible college departments based on marks and interests.</p>
-      <img src="https://images.unsplash.com/photo-1596496056917-6a8f0a6bfa3e?auto=format&fit=crop&w=800&q=80" alt="Guidance" class="mt-6 rounded-lg mx-auto w-full h-64 object-cover">
-    </div>
+  <section id="about" class="py-16 bg-gray-800 text-gray-200 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">About Website</h2>
+    <p class="max-w-3xl mx-auto mb-6">
+      Provide a visually engaging, interactive platform for students to explore educational
+      streams, departments, and career paths offered by the institution.
+      It combines modern web design, animations, and educational guidance tools.
+    </p>
+    <a href="#planets" class="btn-primary">Start Your Journey</a>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-8 text-center">
-    <p>&copy; Sir Issac Newton College. All rights reserved.</p>
-    <p class="text-sm mt-2">Powered by Student Guidance Portal</p>
+  <footer class="bg-black text-gray-400 py-8 text-center">
+    <p>&copy; 2025 SINC. All rights reserved.</p>
+    <p class="text-sm mt-2">Explore, Learn, and To find the Journey</p>
   </footer>
+
+  <!-- JavaScript for Slideshow -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const slides = document.querySelectorAll('.hero-slide');
+      let currentSlide = 0;
+      const slideCount = slides.length;
+      const slideInterval = 5000; // Change image every 5 seconds (adjust as needed)
+
+      function showSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => slide.classList.remove('active'));
+        // Show current slide
+        slides[index].classList.add('active');
+      }
+
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slideCount;
+        showSlide(currentSlide);
+      }
+
+      // Start the slideshow
+      showSlide(currentSlide); // Show first slide immediately
+      setInterval(nextSlide, slideInterval);
+
+      // Optional: Pause on hover (uncomment if desired)
+      // const heroSection = document.querySelector('.hero-slideshow');
+      // let intervalId = setInterval(nextSlide, slideInterval);
+      // heroSection.addEventListener('mouseenter', () => clearInterval(intervalId));
+      // heroSection.addEventListener('mouseleave', () => {
+      //   intervalId = setInterval(nextSlide, slideInterval);
+      // });
+    });
+  </script>
 </body>
 </html>
