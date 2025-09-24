@@ -97,10 +97,10 @@
   <!-- Hero/Banner Section with Slideshow -->
   <section class="relative h-screen flex flex-col justify-center items-center text-center px-4">
     <!-- Slideshow Background -->
-    {% set img1 = url_for('static', filename='blog1.jpg') %}
-{% set img2 = url_for('static', filename='imagees.jpeg') %}
-{% set img3 = url_for('static', filename='images.jpeg') %}
-{% set img4 = url_for('static', filename='blog2.jpg') %}
+{% set img1 = url_for('static', filename='banner/Gemini_Generated_Image_mxx05qmxx05qmxx0.png') %}
+{% set img2 = url_for('static', filename='banner/Gemini_Generated_Image_6hgr1y6hgr1y6hgr.png') %}
+{% set img3 = url_for('static', filename='banner/Gemini_Generated_Image_kweoikweoikweoik.png') %}
+{% set img4 = url_for('static', filename='banner/Gemini_Generated_Image_w9qqnzw9qqnzw9qq.png') %}
 
 <div class="hero-slide active" style="background-image: url('{{ img1 }}');"></div>
 <div class="hero-slide" style="background-image: url('{{ img2 }}');"></div>
@@ -109,14 +109,16 @@
 
 
 
+
     <!-- Dark Overlay for Readability -->
     <div class="hero-overlay"></div>
     <!-- Content Overlay -->
     <div class="hero-content">
-      <h1 class="hero-title mb-4">welcome to Sir Issac Newton Educational Institutions </h1>
+      <h1 class="hero-title mb-4">Welcome To </h1>
       <p class="hero-subtitle mb-6">Students Guides Website.</p>
       <div class="flex gap-4">
-        <a href="#planets" class="btn-primary">Explore Our Institutions</a>
+        <a href="#school" class="btn-primary">School Departments</a>
+        <a href="#planets" class="btn-primary">Explore College Institutions</a>
         <a href="#about" class="btn-outline">Learn More</a>
       </div>
     </div>
@@ -124,62 +126,208 @@
 
   <!-- Planetary Interactive Section -->
   <section id="planets" class="py-16 bg-gradient-to-b from-black to-gray-900">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Our Educational Campus</h2>
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Our College Educational Campus</h2>
     <div class="planet-container max-w-6xl mx-auto px-4">
-      <!-- Planet 1 -->
        <!-- Engineering Planet -->
-<div class="planet relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
+      <div class="planet relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
 
   <!-- Background Video -->
-<video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
-  <source src="{{ url_for('static', filename='videos/mixkit-animation-of-futuristic-devices-99786-hd-ready.mp4') }}" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+  <video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+    <source src="/static/video/mixkit-animation-of-futuristic-devices-99786-hd-ready.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-  <!-- Fallback Image -->
-  <div class="video-fallback absolute w-full h-full top-0 left-0 z-0 hidden">
-    <img src="/static/images/Gemini_Generated_Image_fms5dgfms5dgfms5-removebg-preview.png" 
-         alt="Engineering Fallback" 
-         class="w-full h-full object-cover"
-         onerror="this.src='https://via.placeholder.com/320x384/1e3a8a/fff?text=Engineering';">
-  </div>
-
-  <!-- Overlay -->
+  <!-- Optional Overlay to darken video for readability -->
   <div class="absolute inset-0 bg-black/50 z-10"></div>
 
-  <!-- Content -->
-  <div class="relative z-20 text-white px-4">
-    <img src="/static/images/Gemini_Generated_Image_fms5dgfms5dgfms5-removebg-preview.png" 
+  <!-- Content on top of video -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
+    <img src="/static/logo/Gemini_Generated_Image_fms5dgfms5dgfms5-removebg-preview.png" 
          alt="Engineering Icon" 
-         class="mx-auto w-40 h-40 object-cover rounded-full mb-4">
+         class="w-40 h-40 object-cover rounded-full mb-4">
     <h3 class="text-2xl font-bold mb-2">Engineering</h3>
-    <p class="text-lg max-w-xl mx-auto">
+    <p class="text-lg max-w-xl">
       Engineering is the art of directing the great sources of power in nature for the use and convenience of man.
     </p>
   </div>
+
 </div>
 
-      <!-- Planet 2 -->
-      <div class="planet">
-        <img src="{{ url_for('static', filename='planets/mercury.jpg') }}" alt="Mercury">
-        <h3 class="text-xl font-semibold mb-2">Art & Science</h3>
-        <p>At Tamil Nadu’s premier Arts & Science colleges, we nurture talent, creativity, and innovation.</p>
-      </div>
-      <!-- Planet 3 -->
-      <div class="planet">
-        <img src="{{ url_for('static', filename='planets/venus.jpg') }}" alt="Venus">
-        <h3 class="text-xl font-semibold mb-2">Pharmacy</h3>
-        <p>Blending science, ethics, and compassion to create healthcare professionals of tomorrow.</p>
-      </div>
-      <!-- Planet 4 -->
-      <div class="planet">
-        <img src="{{ url_for('static', filename='planets/mars.jpg') }}" alt="Mars">
-        <h3 class="text-xl font-semibold mb-2">Law</h3>
-        <p>From classroom debates to courtroom excellence, we shape skilled advocates for society.</p>
-      </div>
-    </div>
-  </section>
+<!-- Art & Science Planet -->
+ <div class="planet relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
 
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+    <source src="/static/video/mixkit-students-walking-in-a-university-4519-hd-ready.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Optional Overlay to darken video for readability -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+  <!-- Content on top of video -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
+    <img src="/static/logo/Gemini_Generated_Image_hy5pnbhy5pnbhy5p-removebg-preview.png" 
+         alt="Engineering Icon" 
+         class="w-40 h-40 object-cover rounded-full mb-4">
+    <h3 class="text-2xl font-bold mb-2">Art & Science</h3>
+    <p class="text-lg max-w-xl">
+      At Tamil Nadu’s premier Arts & Science colleges, we nurture talent, creativity, and innovation.
+    </p>
+  </div>
+
+</div>
+<!-- Pharmacy Planet -->
+ <div class="planet relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
+
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+    <source src="/static/video/mixkit-scientists-analyzing-biological-samples-46747-hd-ready.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Optional Overlay to darken video for readability -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+  <!-- Content on top of video -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
+    <img src="/static/logo/Gemini_Generated_Image_idne45idne45idne-removebg-preview.png" 
+         alt="Engineering Icon" 
+         class="w-40 h-40 object-cover rounded-full mb-4">
+    <h3 class="text-2xl font-bold mb-2">Pharmacy</h3>
+    <p class="text-lg max-w-xl">
+      Blending science, ethics, and compassion to create healthcare professionals of tomorrow.
+    </p>
+  </div>
+
+</div>
+<!-- Law Planet -->
+  <div class="planet relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
+
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+    <source src="/static/video/mixkit-judge-writes-verdict-and-sentence-to-be-imposed-47687-hd-ready.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Optional Overlay to darken video for readability -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+  <!-- Content on top of video -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
+    <img src="/static/logo/Gemini_Generated_Image_o07w0uo07w0uo07w.png" 
+         alt="Engineering Icon" 
+         class="w-40 h-40 object-cover rounded-full mb-4">
+    <h3 class="text-2xl font-bold mb-2">Law</h3>
+    <p class="text-lg max-w-xl">
+      From classroom debates to courtroom excellence, we shape skilled advocates for society.
+    </p>
+  </div>
+
+</div>
+  </section>
+ <!-- School section -->
+  <section id="school" class="py-16 bg-gradient-to-b from-black to-gray-900">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Our School Educational Campus</h2>
+    <div class="planet-container max-w-6xl mx-auto px-4">
+       <!-- Engineering Planet -->
+      <div class="school relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
+
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+    <source src="/static/video/mixkit-animation-of-futuristic-devices-99786-hd-ready.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Optional Overlay to darken video for readability -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+  <!-- Content on top of video -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
+    <img src="/static/logo/Gemini_Generated_Image_fms5dgfms5dgfms5-removebg-preview.png" 
+         alt="Engineering Icon" 
+         class="w-40 h-40 object-cover rounded-full mb-4">
+    <h3 class="text-2xl font-bold mb-2">Engineering</h3>
+    <p class="text-lg max-w-xl">
+      Engineering is the art of directing the great sources of power in nature for the use and convenience of man.
+    </p>
+  </div>
+
+</div>
+
+<!-- Art & Science Planet -->
+ <div class="school relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
+
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+    <source src="/static/video/mixkit-students-walking-in-a-university-4519-hd-ready.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Optional Overlay to darken video for readability -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+  <!-- Content on top of video -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
+    <img src="/static/logo/Gemini_Generated_Image_hy5pnbhy5pnbhy5p-removebg-preview.png" 
+         alt="Engineering Icon" 
+         class="w-40 h-40 object-cover rounded-full mb-4">
+    <h3 class="text-2xl font-bold mb-2">Art & Science</h3>
+    <p class="text-lg max-w-xl">
+      At Tamil Nadu’s premier Arts & Science colleges, we nurture talent, creativity, and innovation.
+    </p>
+  </div>
+
+</div>
+<!-- Pharmacy Planet -->
+ <div class="school relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
+
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+    <source src="/static/video/mixkit-scientists-analyzing-biological-samples-46747-hd-ready.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Optional Overlay to darken video for readability -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+  <!-- Content on top of video -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
+    <img src="/static/logo/Gemini_Generated_Image_idne45idne45idne-removebg-preview.png" 
+         alt="Engineering Icon" 
+         class="w-40 h-40 object-cover rounded-full mb-4">
+    <h3 class="text-2xl font-bold mb-2">Pharmacy</h3>
+    <p class="text-lg max-w-xl">
+      Blending science, ethics, and compassion to create healthcare professionals of tomorrow.
+    </p>
+  </div>
+
+</div>
+<!-- Law Planet -->
+  <div class="school relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
+
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="absolute w-full h-full object-cover top-0 left-0 z-0">
+    <source src="/static/video/mixkit-judge-writes-verdict-and-sentence-to-be-imposed-47687-hd-ready.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Optional Overlay to darken video for readability -->
+  <div class="absolute inset-0 bg-black/50 z-10"></div>
+
+  <!-- Content on top of video -->
+  <div class="relative z-20 flex flex-col items-center justify-center h-full text-white text-center px-4">
+    <img src="/static/logo/Gemini_Generated_Image_o07w0uo07w0uo07w.png" 
+         alt="Engineering Icon" 
+         class="w-40 h-40 object-cover rounded-full mb-4">
+    <h3 class="text-2xl font-bold mb-2">Law</h3>
+    <p class="text-lg max-w-xl">
+      From classroom debates to courtroom excellence, we shape skilled advocates for society.
+    </p>
+  </div>
+
+</div>
+  </section>
   <!-- Recommendation Section -->
   <section id="recommendation" class="py-20 bg-gray-900 text-white text-center">
     <h2 class="text-3xl md:text-4xl font-bold mb-10">Find Your Stream / Department</h2>

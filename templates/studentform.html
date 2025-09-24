@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex justify-center items-center h-screen">
+  <div class="bg-gray-800 p-8 rounded-xl shadow-lg w-96">
+    <h1 class="text-2xl font-bold mb-6">Student Information ({{ student_type }})</h1>
+
+    {% if error %}
+      <p class="text-red-500 mb-4">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('student_form', student_type=student_type) }}">
+      <input type="text" name="name" placeholder="Name" required class="w-full mb-3 p-2 rounded text-black">
+      <input type="email" name="email" placeholder="Email" required class="w-full mb-3 p-2 rounded text-black">
+      <input type="text" name="phone" placeholder="Phone" required class="w-full mb-3 p-2 rounded text-black">
+      <input type="text" name="interest" placeholder="Interest" class="w-full mb-3 p-2 rounded text-black">
+      <input type="text" name="department" placeholder="Department" class="w-full mb-3 p-2 rounded text-black">
+      <button type="submit" class="bg-blue-600 w-full py-2 rounded font-semibold hover:bg-blue-500">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
