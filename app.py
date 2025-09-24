@@ -81,9 +81,10 @@ def student_form(student_type):
         phone = request.form.get('phone', '').strip()
         interest = request.form.get('interest', '').strip()
         department = request.form.get('department', '').strip()
+        place = request.form.get('place', '').strip()  # <-- NEW LINE
 
-        if not all([name, email, phone]):
-            return render_template('studentform.html', student_type=student_type, error="Fill name, email, and phone.")
+        if not all([name, email, phone, place]):
+            return render_template('studentform.html', student_type=student_type, error="Fill name, email, phone, and place.")
 
         # Save to CSV
         csv_file = 'tenth_students.csv' if student_type == '10th' else 'twelfth_students.csv'
@@ -92,9 +93,9 @@ def student_form(student_type):
             with open(csv_file, 'a', newline='') as f:
                 writer = csv.writer(f)
                 if not file_exists:
-                    writer.writerow(['Name', 'Email', 'Phone', 'Interest', 'Department'])
-                writer.writerow([name, email, phone, interest, department])
-            flash('Student registered successfully!')  # Optional: Success message
+                    writer.writerow(['Name', 'Email', 'Phone', 'Interest', 'Department', 'Place'])  # <-- UPDATED HEADER
+                writer.writerow([name, email, phone, interest, department, place])  # <-- UPDATED ROW
+            flash('Student registered successfully!')
         except Exception as e:
             flash(f'Error saving data: {str(e)}')
             return render_template('studentform.html', student_type=student_type, error="Failed to save data.")
