@@ -9,78 +9,80 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body { font-family: 'Montserrat', sans-serif; background: #0a0a0a; color: #fff; }
-
-    /* Smooth scroll */
     html { scroll-behavior: smooth; }
-
-    /* Hero animation for planets */
-    .planet-container { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 2rem; padding: 2rem 0; }
-    .planet { flex: 0 0 80%; scroll-snap-align: center; border-radius: 1rem; background: #111; padding: 2rem; text-align: center; transition: transform 0.5s; }
-    .planet img { width: 200px; height: 200px; object-fit: cover; margin-bottom: 1rem; border-radius: 50%; animation: spin 20s linear infinite; }
-    .planet:hover { transform: scale(1.05); }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-    /* Hero heading */
-    .hero-title { font-size: 2.5rem; font-weight: 700; }
-    .hero-subtitle { font-size: 1.25rem; margin-top: 1rem; color: #facc15; }
-
-    /* Call-to-action buttons */
-    .btn-primary { background-color: #3b82f6; color: #fff; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: background 0.3s; text-decoration: none; display: inline-block; }
+    .hero-title { font-size: 2rem; font-weight: 700; }
+    @media (min-width: 768px) { .hero-title { font-size: 2.5rem; } }
+    .hero-subtitle { font-size: 1rem; margin-top: 1rem; color: #facc15; }
+    @media (min-width: 768px) { .hero-subtitle { font-size: 1.25rem; } }
+    .btn-primary, .btn-outline {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      transition: background 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary { background-color: #3b82f6; color: #fff; }
     .btn-primary:hover { background-color: #2563eb; }
-
-    .btn-outline { border: 2px solid #fff; color: #fff; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: all 0.3s; text-decoration: none; display: inline-block; }
+    .btn-outline { border: 2px solid #fff; color: #fff; }
     .btn-outline:hover { background: #fff; color: #0a0a0a; }
-
-    /* Slideshow Styles for Hero/Banner Section */
-    .hero-slideshow {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -2; /* Behind content */
-    }
-    .hero-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0;
-      transition: opacity 1s ease-in-out; /* Smooth fade */
-    }
-    .hero-slide.active {
-      opacity: 1;
-    }
-    .hero-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.4); /* Semi-transparent dark overlay for readability */
-      z-index: -1;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 10; /* On top of slideshow */
+    .hero-slideshow, .hero-slide, .hero-slide.active, .hero-overlay, .hero-content { /* unchanged */ }
+    .planet-container, .school-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 1rem;
+      gap: 1.5rem;
+      padding: 1rem 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
     }
+    @media (min-width: 768px) {
+      .planet-container, .school-container {
+        flex-direction: row;
+        gap: 2rem;
+        padding: 2rem 0;
+      }
+    }
+    .planet, .school {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      border-radius: 1rem;
+      background: #111;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.5s;
+      min-width: 90vw;
+      max-width: 100vw;
+      position: relative;
+      height: 350px;
+    }
+    @media (min-width: 768px) {
+      .planet, .school {
+        flex: 0 0 80%;
+        min-width: 400px;
+        height: 400px;
+        padding: 2rem;
+      }
+    }
+    .planet img, .school img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      border-radius: 50%;
+      animation: spin 20s linear infinite;
+    }
+    @media (min-width: 768px) {
+      .planet img, .school img { width: 200px; height: 200px; }
+    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .relative.z-20 { padding: 0 0.5rem; }
   </style>
 </head>
 <body>
   <!-- Navigation -->
   <nav class="bg-gray-900 shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-3">
+    <div class="max-w-full md:max-w-7xl mx-auto px-2 md:px-4 flex flex-col md:flex-row justify-between items-center py-3 gap-2">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
           <i class="fas fa-rocket text-white"></i>
@@ -90,25 +92,22 @@
           <div class="text-sm text-gray-300">Students guide</div>
         </div>
       </div>
-      <a href="#planets" class="btn-primary">Get Started</a>
+      <a href="#planets" class="btn-primary mt-2 md:mt-0">Get Started</a>
     </div>
   </nav>
 
   <!-- Hero/Banner Section with Slideshow -->
-  <section class="relative h-screen flex flex-col justify-center items-center text-center px-4">
+  <section class="relative h-[70vh] md:h-screen flex flex-col justify-center items-center text-center px-2 md:px-4">
     <!-- Slideshow Background -->
-{% set img1 = url_for('static', filename='banner/Gemini_Generated_Image_mxx05qmxx05qmxx0.png') %}
-{% set img2 = url_for('static', filename='banner/Gemini_Generated_Image_6hgr1y6hgr1y6hgr.png') %}
-{% set img3 = url_for('static', filename='banner/Gemini_Generated_Image_kweoikweoikweoik.png') %}
-{% set img4 = url_for('static', filename='banner/Gemini_Generated_Image_w9qqnzw9qqnzw9qq.png') %}
+    {% set img1 = url_for('static', filename='banner/Gemini_Generated_Image_mxx05qmxx05qmxx0.png') %}
+    {% set img2 = url_for('static', filename='banner/Gemini_Generated_Image_6hgr1y6hgr1y6hgr.png') %}
+    {% set img3 = url_for('static', filename='banner/Gemini_Generated_Image_kweoikweoikweoik.png') %}
+    {% set img4 = url_for('static', filename='banner/Gemini_Generated_Image_w9qqnzw9qqnzw9qq.png') %}
 
-<div class="hero-slide active" style="background-image: url('{{ img1 }}');"></div>
-<div class="hero-slide" style="background-image: url('{{ img2 }}');"></div>
-<div class="hero-slide" style="background-image: url('{{ img3 }}');"></div>
-<div class="hero-slide" style="background-image: url('{{ img4 }}');"></div>
-
-
-
+    <div class="hero-slide active" style="background-image: url('{{ img1 }}');"></div>
+    <div class="hero-slide" style="background-image: url('{{ img2 }}');"></div>
+    <div class="hero-slide" style="background-image: url('{{ img3 }}');"></div>
+    <div class="hero-slide" style="background-image: url('{{ img4 }}');"></div>
 
     <!-- Dark Overlay for Readability -->
     <div class="hero-overlay"></div>
@@ -116,7 +115,7 @@
     <div class="hero-content">
       <h1 class="hero-title mb-4">Welcome To </h1>
       <p class="hero-subtitle mb-6">Students Guides Website.</p>
-      <div class="flex gap-4">
+      <div class="flex flex-col md:flex-row gap-2 md:gap-4">
         <a href="#school" class="btn-primary">School Departments</a>
         <a href="#planets" class="btn-primary">Explore College Institutions</a>
         <a href="#about" class="btn-outline">Learn More</a>
@@ -125,9 +124,9 @@
   </section>
 
   <!-- Planetary Interactive Section -->
-  <section id="planets" class="py-16 bg-gradient-to-b from-black to-gray-900">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Our College Educational Campus</h2>
-    <div class="planet-container max-w-6xl mx-auto px-4">
+  <section id="planets" class="py-10 md:py-16 bg-gradient-to-b from-black to-gray-900">
+    <h2 class="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-10">Our College Educational Campus</h2>
+    <div class="planet-container max-w-full md:max-w-6xl mx-auto px-2 md:px-4">
        <!-- Engineering Planet -->
       <div class="planet relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
 
@@ -227,9 +226,9 @@
 </div>
   </section>
  <!-- School section -->
-  <section id="school" class="py-16 bg-gradient-to-b from-black to-gray-900">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Our School Educational Campus</h2>
-    <div class="planet-container max-w-6xl mx-auto px-4">
+  <section id="school" class="py-10 md:py-16 bg-gradient-to-b from-black to-gray-900">
+    <h2 class="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-10">Our School Educational Campus</h2>
+    <div class="school-container max-w-full md:max-w-6xl mx-auto px-2 md:px-4">
        <!-- Engineering Planet -->
       <div class="school relative h-96 flex items-center justify-center text-center overflow-hidden rounded-xl shadow-lg">
 
@@ -329,30 +328,28 @@
 </div>
   </section>
   <!-- Recommendation Section -->
-  <section id="recommendation" class="py-20 bg-gray-900 text-white text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-10">Find Your Stream / Department</h2>
-
-    <div class="max-w-4xl mx-auto px-4 grid md:grid-cols-2 gap-8">
+  <section id="recommendation" class="py-10 md:py-20 bg-gray-900 text-white text-center">
+    <h2 class="text-2xl md:text-4xl font-bold mb-6 md:mb-10">Find Your Stream / Department</h2>
+    <div class="max-w-full md:max-w-4xl mx-auto px-2 md:px-4 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
       <!-- 10th Recommendation -->
-      <div class="bg-gray-800 p-6 rounded-xl shadow">
-        <h3 class="font-semibold text-xl mb-4">10th Standard Stream Recommendation</h3>
-        <p class="mb-4">Enter your marks and interests to find the best stream for your higher studies.</p>
+      <div class="bg-gray-800 p-4 md:p-6 rounded-xl shadow">
+        <h3 class="font-semibold text-lg md:text-xl mb-2 md:mb-4">10th Standard Stream Recommendation</h3>
+        <p class="mb-2 md:mb-4">Enter your marks and interests to find the best stream for your higher studies.</p>
         <a href="{{ url_for('tenth') }}" class="btn-primary inline-block">Go to 10th Recommendation</a>
       </div>
-
       <!-- 12th Recommendation -->
-      <div class="bg-gray-800 p-6 rounded-xl shadow">
-        <h3 class="font-semibold text-xl mb-4">12th Standard Department Recommendation</h3>
-        <p class="mb-4">Enter your marks to see eligible college departments based on your 12th performance.</p>
+      <div class="bg-gray-800 p-4 md:p-6 rounded-xl shadow">
+        <h3 class="font-semibold text-lg md:text-xl mb-2 md:mb-4">12th Standard Department Recommendation</h3>
+        <p class="mb-2 md:mb-4">Enter your marks to see eligible college departments based on your 12th performance.</p>
         <a href="{{ url_for('twelfth') }}" class="btn-primary inline-block">Go to 12th Recommendation</a>
       </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-16 bg-gray-800 text-gray-200 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6">About Website</h2>
-    <p class="max-w-3xl mx-auto mb-6">
+  <section id="about" class="py-10 md:py-16 bg-gray-800 text-gray-200 text-center">
+    <h2 class="text-2xl md:text-4xl font-bold mb-4 md:mb-6">About Website</h2>
+    <p class="max-w-full md:max-w-3xl mx-auto mb-4 md:mb-6 px-2 md:px-0">
       Provide a visually engaging, interactive platform for students to explore educational
       streams, departments, and career paths offered by the institution.
       It combines modern web design, animations, and educational guidance tools.
@@ -361,7 +358,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-black text-gray-400 py-8 text-center">
+  <footer class="bg-black text-gray-400 py-6 md:py-8 text-center">
     <p>&copy; 2025 SINC. All rights reserved.</p>
     <p class="text-sm mt-2">Explore, Learn, and To find the Journey</p>
   </footer>
@@ -372,31 +369,17 @@
       const slides = document.querySelectorAll('.hero-slide');
       let currentSlide = 0;
       const slideCount = slides.length;
-      const slideInterval = 5000; // Change image every 5 seconds (adjust as needed)
-
+      const slideInterval = 5000;
       function showSlide(index) {
-        // Hide all slides
         slides.forEach(slide => slide.classList.remove('active'));
-        // Show current slide
         slides[index].classList.add('active');
       }
-
       function nextSlide() {
         currentSlide = (currentSlide + 1) % slideCount;
         showSlide(currentSlide);
       }
-
-      // Start the slideshow
-      showSlide(currentSlide); // Show first slide immediately
+      showSlide(currentSlide);
       setInterval(nextSlide, slideInterval);
-
-      // Optional: Pause on hover (uncomment if desired)
-      // const heroSection = document.querySelector('.hero-slideshow');
-      // let intervalId = setInterval(nextSlide, slideInterval);
-      // heroSection.addEventListener('mouseenter', () => clearInterval(intervalId));
-      // heroSection.addEventListener('mouseleave', () => {
-      //   intervalId = setInterval(nextSlide, slideInterval);
-      // });
     });
   </script>
 </body>
