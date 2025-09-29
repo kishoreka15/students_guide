@@ -3,40 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>10th Recommendation</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>10th Stream Recommendation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      overflow: hidden;
+      position: relative;
+      color: #fff;
+    }
+
+    /* Floating shapes */
+    .shape { position: absolute; border-radius: 50%; opacity: 0.2; animation: float 15s linear infinite; background: rgba(255,255,255,0.5);}
+    @keyframes float { 0% { transform: translateY(100vh) rotate(0deg); opacity:0.2;} 100% { transform: translateY(-100px) rotate(360deg); opacity:0;} }
+
+    /* Card */
+    .card {
+      background: rgba(255,255,255,0.15);
+      padding: 30px 40px;
+      border-radius: 25px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+      width: 480px;
+      text-align: center;
+      animation: popIn 1s ease forwards;
+    }
+    @keyframes popIn { 0% { transform: scale(0.5); opacity:0; } 100% { transform: scale(1); opacity:1; } }
+
+    h1 { font-size: 2rem; margin-bottom: 20px; color: #fff; animation: bounce 1s infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    label { display: block; margin-bottom: 5px; font-weight: 600; color: #fff; }
+    input[type=number], select { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 15px; border: 2px solid #fff; outline: none; font-size: 1rem; transition: transform 0.3s, border-color 0.3s;}
+    input[type=number]:focus, select:focus { border-color: #ffd700; transform: scale(1.05); }
+
+    /* Interests checkboxes */
+    .interests { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px; justify-content: center; }
+    .interests label { flex: 1 1 40%; background: rgba(255,255,255,0.2); padding: 10px; border-radius: 15px; cursor: pointer; transition: all 0.3s; }
+    .interests input[type=checkbox] { display: none; }
+    .interests input[type=checkbox]:checked + span { background: #ffd700; color: #000; font-weight: bold; transform: scale(1.05); }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 25px;
+      border: none;
+      background: linear-gradient(45deg, #6a11cb, #2575fc);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    button:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+
+    .recommendation { margin-top: 25px; background: rgba(255,255,255,0.15); padding: 20px; border-radius: 20px; text-align: left; animation: fadeIn 1s ease forwards; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+
+    .recommendation h2 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+    .recommendation p { margin-bottom: 8px; color: #fff; }
+
+  </style>
 </head>
-<body class="bg-gray-100 p-6">
-  <h1 class="text-3xl font-bold mb-6">10th Standard Stream Recommendation</h1>
+<body>
+  <!-- Floating shapes -->
+  <div class="shape" style="width:80px; height:80px; left:10%; animation-duration:20s;"></div>
+  <div class="shape" style="width:50px; height:50px; left:70%; animation-duration:25s;"></div>
+  <div class="shape" style="width:100px; height:100px; left:40%; animation-duration:18s;"></div>
 
-  <form method="POST" class="bg-white p-6 rounded-lg shadow max-w-lg mx-auto">
-    <label class="block mb-2">Maths Interest (1-5)</label>
-    <input type="number" name="maths_interest" min="1" max="5" required class="border p-2 w-full mb-4">
+  <div class="card">
+    <h1>🎓 10th Stream Recommendation</h1>
+    <form method="POST">
+      <label>Maths Interest (1-5)</label>
+      <input type="number" name="maths_interest" min="1" max="5" required>
 
-    <label class="block mb-2">Science Interest (1-5)</label>
-    <input type="number" name="science_interest" min="1" max="5" required class="border p-2 w-full mb-4">
+      <label>Science Interest (1-5)</label>
+      <input type="number" name="science_interest" min="1" max="5" required>
 
-    <label class="block mb-2">Biology Interest (1-5)</label>
-    <input type="number" name="bio_interest" min="1" max="5" required class="border p-2 w-full mb-4">
+      <label>Biology Interest (1-5)</label>
+      <input type="number" name="bio_interest" min="1" max="5" required>
 
-    <label class="block mb-2">Commerce Interest (1-5)</label>
-    <input type="number" name="commerce_interest" min="1" max="5" required class="border p-2 w-full mb-4">
+      <label>Commerce Interest (1-5)</label>
+      <input type="number" name="commerce_interest" min="1" max="5" required>
 
-    <label class="block mb-2">Current Marks (%)</label>
-    <input type="number" name="current_marks" min="0" max="100" required class="border p-2 w-full mb-4">
+      <label>Current Marks (%)</label>
+      <input type="number" name="current_marks" min="0" max="100" required>
 
-    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Get Recommendation</button>
-  </form>
+      <!-- Department Selection -->
+      <label>Select Your Department</label>
+      <select name="department" required>
+        <option value="">--Choose Department--</option>
+        <option value="Medical">Medical</option>
+        <option value="Engineering">Engineering</option>
+        <option value="IT/Computer">IT/Computer</option>
+        <option value="Banking/Commerce">Banking/Commerce</option>
+        <option value="Arts/Humanities">Arts/Humanities</option>
+        <option value="Business">Business</option>
+      </select>
 
-  {% if recommended %}
-  <div class="mt-8 bg-white p-6 rounded-lg shadow max-w-lg mx-auto">
-    <h2 class="text-2xl font-bold">Recommendation: {{ stream_info.name if stream_info else recommended }}</h2>
-    {% if stream_info %}
-      <p class="mt-2">{{ stream_info.description }}</p>
-      <p class="mt-2"><strong>Subjects:</strong> {{ stream_info.subjects|join(', ') }}</p>
-      <p class="mt-2"><strong>Careers:</strong> {{ stream_info.careers|join(', ') }}</p>
+      <!-- Interests Selection -->
+      <label>Select Your Interests / Career Goals</label>
+      <div class="interests">
+        <label><input type="checkbox" name="interest" value="Medical"><span>Medical</span></label>
+        <label><input type="checkbox" name="interest" value="Engineering"><span>Engineering</span></label>
+        <label><input type="checkbox" name="interest" value="IT/Computer"><span>IT/Computer</span></label>
+        <label><input type="checkbox" name="interest" value="Banking"><span>Banking</span></label>
+        <label><input type="checkbox" name="interest" value="Arts/Humanities"><span>Arts/Humanities</span></label>
+        <label><input type="checkbox" name="interest" value="Business"><span>Business</span></label>
+      </div>
+
+      <button type="submit">Get Recommendation 🎯</button>
+    </form>
+
+    {% if recommended %}
+    <div class="recommendation">
+      <h2>Recommendation: {{ stream_info.name if stream_info else recommended }}</h2>
+      {% if stream_info %}
+        <p>{{ stream_info.description }}</p>
+        <p><strong>Subjects:</strong> {{ stream_info.subjects|join(', ') }}</p>
+        <p><strong>Careers:</strong> {{ stream_info.careers|join(', ') }}</p>
+        <p><strong>Department:</strong> {{ request.form.department }}</p>
+        <p><strong>Interests:</strong> {{ request.form.getlist('interest')|join(', ') }}</p>
+      {% endif %}
+    </div>
     {% endif %}
   </div>
-  {% endif %}
+
+  <script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+      const checked = form.querySelectorAll('input[name="interest"]:checked');
+      const department = form.department.value;
+      if(checked.length === 0){
+        e.preventDefault();
+        alert('Please select at least one interest.');
+      } else if (!department){
+        e.preventDefault();
+        alert('Please select a department.');
+      }
+    });
+  </script>
 </body>
 </html>

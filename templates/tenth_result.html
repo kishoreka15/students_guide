@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>10th Stream Recommendation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { 
+      font-family: 'Montserrat', sans-serif; 
+      min-height: 100vh; 
+      margin: 0; 
+      overflow: hidden;
+      color: #fff;
+      background: linear-gradient(270deg, #1d2671, #c33764, #0f2027, #2c5364);
+      background-size: 600% 600%;
+      animation: gradientMove 20s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Bubbles */
+    .bubbles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+
+    .bubbles span {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 50%;
+      animation: bubbleMove 25s infinite;
+    }
+
+    .bubbles span:nth-child(1) { left: 10%; animation-duration: 12s; width: 60px; height: 60px; }
+    .bubbles span:nth-child(2) { left: 25%; animation-duration: 18s; }
+    .bubbles span:nth-child(3) { left: 40%; animation-duration: 20s; width: 30px; height: 30px; }
+    .bubbles span:nth-child(4) { left: 70%; animation-duration: 22s; width: 80px; height: 80px; }
+    .bubbles span:nth-child(5) { left: 85%; animation-duration: 16s; }
+
+    @keyframes bubbleMove {
+      0% { transform: translateY(0) scale(1); opacity: 0.6; }
+      50% { transform: translateY(-400px) scale(1.2); opacity: 1; }
+      100% { transform: translateY(-800px) scale(0.8); opacity: 0; }
+    }
+
+    /* Glass Cards */
+    .glass { 
+      background: rgba(255,255,255,0.08); 
+      backdrop-filter: blur(15px); 
+      border: 1px solid rgba(255,255,255,0.2); 
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+    .glass:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 20px #ff9ff3;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center p-6">
+
+  <!-- Background bubbles -->
+  <div class="bubbles">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+    <!-- Inputs Summary -->
+    <section class="glass rounded-2xl p-6 md:col-span-1 shadow-xl">
+      <h1 class="text-3xl font-bold mb-2 text-pink-300">Your Inputs</h1>
+      <p class="text-sm text-gray-200">Based on your interests and marks</p>
+      <div class="mt-6 grid grid-cols-2 gap-3 text-sm">
+        <div class="bg-white/10 rounded-xl p-3">
+          <div class="text-gray-300">Maths Interest</div>
+          <div class="text-xl font-semibold">{{ maths_interest }}</div>
+        </div>
+        <div class="bg-white/10 rounded-xl p-3">
+          <div class="text-gray-300">Science Interest</div>
+          <div class="text-xl font-semibold">{{ science_interest }}</div>
+        </div>
+        <div class="bg-white/10 rounded-xl p-3">
+          <div class="text-gray-300">Biology Interest</div>
+          <div class="text-xl font-semibold">{{ bio_interest }}</div>
+        </div>
+        <div class="bg-white/10 rounded-xl p-3">
+          <div class="text-gray-300">Commerce Interest</div>
+          <div class="text-xl font-semibold">{{ commerce_interest }}</div>
+        </div>
+        <div class="bg-white/10 rounded-xl p-3 col-span-2">
+          <div class="text-gray-300">Current Marks</div>
+          <div class="text-xl font-semibold">{{ current_marks }}%</div>
+        </div>
+      </div>
+      <div class="mt-6 flex gap-3">
+        <a href="{{ url_for('tenth') }}" class="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 transition">⬅ Back</a>
+        <a href="{{ url_for('home') }}" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 transition">🏠 Home</a>
+      </div>
+    </section>
+
+    <!-- Recommendation -->
+    <section class="glass rounded-2xl p-6 md:col-span-2 shadow-xl">
+      <h2 class="text-2xl font-bold mb-4 text-yellow-300">Recommended Stream</h2>
+      <div class="bg-white/10 rounded-xl p-4 mb-4">
+        <div class="text-2xl font-bold text-green-300">{{ recommended }}</div>
+        {% if reason %}
+          <div class="text-sm text-gray-300 mt-1">Reason: {{ reason }}</div>
+        {% endif %}
+      </div>
+
+      {% if selected_department %}
+        <div class="text-sm text-gray-300 mb-6">Selected Department Preference: <b>{{ selected_department }}</b></div>
+      {% endif %}
+
+      <div>
+        <h3 class="font-semibold mb-2 text-purple-300">Next steps</h3>
+        <ul class="list-disc list-inside text-gray-200 text-sm space-y-1">
+          <li>Discuss with a counselor or mentor.</li>
+          <li>Explore detailed subjects and career paths for {{ recommended }}.</li>
+          <li>Work on improving weaker areas to expand your choices.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

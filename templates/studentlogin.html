@@ -3,21 +3,169 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Type</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Student Type Selection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #f6d365, #fda085, #a1c4fd, #c2e9fb);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Floating stars */
+    .star {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-200px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+
+    /* Main card */
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 25px;
+      padding: 50px 40px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: bounceIn 1.5s ease;
+      z-index: 1;
+      position: relative;
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      80% { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    .card h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #fff;
+      text-shadow: 2px 2px #ff9a9e;
+      animation: colorPulse 3s infinite;
+    }
+
+    @keyframes colorPulse {
+      0%, 100% { color: #fff; }
+      50% { color: #ffd700; }
+    }
+
+    .card p {
+      margin-bottom: 30px;
+      font-size: 1.2rem;
+      color: #fff;
+      text-shadow: 1px 1px #00000050;
+    }
+
+    /* Buttons */
+    .buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .buttons button {
+      background: #ff6f61;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .buttons button:hover {
+      transform: translateY(-10px) scale(1.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+    .buttons button::after {
+      content: '';
+      position: absolute;
+      width: 300%;
+      height: 300%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 80%);
+      top: -100%;
+      left: -100%;
+      transition: all 0.5s;
+    }
+    .buttons button:hover::after { top: -50%; left: -50%; }
+
+    /* Cute bouncing icons */
+    .icon {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 10px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Responsive */
+    @media(max-width:600px) {
+      .card { padding: 30px 20px; }
+      .buttons button { width: 100%; }
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-gray-900 text-white flex justify-center items-center h-screen">
-  <div class="bg-gray-800 p-8 rounded-xl shadow-lg text-center w-96">
-    <h1 class="text-2xl font-bold mb-6">Are you a 10th or 12th student?</h1>
+<body>
+  <!-- Floating stars -->
+  <script>
+    for(let i=0;i<50;i++){
+      let star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * window.innerWidth + 'px';
+      star.style.top = Math.random() * window.innerHeight + 'px';
+      star.style.width = star.style.height = Math.random()*5+5+'px';
+      star.style.animationDuration = Math.random()*5+3+'s';
+      document.body.appendChild(star);
+    }
+  </script>
 
-    {% if error %}
-      <p class="text-red-500 mb-4">{{ error }}</p>
-    {% endif %}
-
-    <form method="POST" action="{{ url_for('student_login') }}" class="flex flex-col gap-4">
-      <button name="student_type" value="10th" class="bg-blue-600 py-2 rounded font-semibold hover:bg-blue-500">10th Student</button>
-      <button name="student_type" value="12th" class="bg-yellow-600 py-2 rounded font-semibold hover:bg-yellow-500">12th Student</button>
-    </form>
+  <div class="card">
+    <h1>🎓 Choose Your Class!</h1>
+    <p>Click below to select if you are a 10th or 12th student</p>
+    <div class="buttons">
+      <button type="button" name="student_type" value="10th" data-href="{{ url_for('student_login') }}?student_type=10th">
+        🔹 10th Student
+      </button>
+      <button type="button" name="student_type" value="12th" data-href="{{ url_for('student_login') }}?student_type=12th">
+        🔸 12th Student
+      </button>
+    </div>
   </div>
+  <script>
+    // Attach click handlers to buttons with data-href to avoid inline JS
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.buttons button[data-href]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const href = btn.getAttribute('data-href');
+          if (href) window.location.href = href;
+        });
+      });
+    });
+  </script>
 </body>
 </html>

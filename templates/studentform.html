@@ -3,29 +3,137 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Form</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Student Form ({{ student_type }})</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Comic Sans MS', cursive, sans-serif; }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Floating Stars */
+    .star { position:absolute; border-radius:50%; background:yellow; animation:floatStars linear infinite; opacity:0.8; }
+    @keyframes floatStars {
+      0% { transform: translateY(100vh) rotate(0deg); opacity:0.8; }
+      100% { transform: translateY(-50px) rotate(360deg); opacity:0; }
+    }
+
+    .card {
+      background: #ffffffaa;
+      padding: 30px 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 420px;
+      animation: popIn 1s ease forwards;
+    }
+
+    @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+    h1 { font-size: 2rem; margin-bottom: 15px; color: #ff6f91; animation: bounce 1.2s ease infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    p { font-size: 1rem; margin-bottom: 20px; color: #555; }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 15px;
+      border: 2px solid #ff6f91;
+      outline: none;
+      font-size: 1rem;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    input:focus, select:focus { border-color: #ffb347; transform: scale(1.05); }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 25px;
+      border: none;
+      background: linear-gradient(45deg, #ff6f91, #ffb347);
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    button:hover { transform: scale(1.05); box-shadow: 0 5px 20px rgba(0,0,0,0.2); }
+
+    .error { color: #ff4b4b; margin-bottom: 10px; font-weight: 600; }
+
+  </style>
 </head>
-<body class="bg-gray-900 text-white flex justify-center items-center h-screen">
-  <div class="bg-gray-800 p-8 rounded-xl shadow-lg w-96">
-    <h1 class="text-2xl font-bold mb-6">Student Information ({{ student_type }})</h1>
+<body>
+  <div id="stars-container"></div>
+
+  <div class="card">
+    <h1>🌟 Student Form ({{ student_type }})</h1>
+    <p>Fill in all fields to continue!</p>
 
     {% if error %}
-      <p class="text-red-500 mb-4">{{ error }}</p>
+      <p class="error">{{ error }}</p>
     {% endif %}
 
-    <form method="POST" action="{{ url_for('student_form', student_type=student_type) }}">
-      <input type="text" name="name" placeholder="Name" required class="w-full mb-3 p-2 rounded text-black">
-      <input type="email" name="email" placeholder="Email" required class="w-full mb-3 p-2 rounded text-black">
-      <input type="text" name="phone" placeholder="Phone" required class="w-full mb-3 p-2 rounded text-black">
-      <input type="text" name="interest" placeholder="Interest" class="w-full mb-3 p-2 rounded text-black">
-      <input type="text" name="department" placeholder="Department" class="w-full mb-3 p-2 rounded text-black">
-      <div>
-        <label for="place">Place/Location:</label>
-        <input type="text" id="place" name="place" required class="input">
-      </div>
-      <button type="submit" class="bg-blue-600 w-full py-2 rounded font-semibold hover:bg-blue-500">Submit</button>
+    <form id="studentForm" method="POST" action="{{ url_for('student_form', student_type=student_type) }}">
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="text" name="phone" placeholder="Phone" required>
+
+      <select name="interest" required>
+        <option value="">-- Select Interest --</option>
+        <option value="Medical">Medical (MBBS, BDS, Nursing)</option>
+        <option value="Engineering">Engineering (IT, Computer, Mechanical, Electrical)</option>
+        <option value="Commerce">Commerce / Banking / Business</option>
+        <option value="Arts">Arts / Humanities / Social Sciences</option>
+      </select>
+
+      <select name="department" required>
+        <option value="">-- Select Department --</option>
+        <option value="Science">Science</option>
+        <option value="Commerce">Commerce</option>
+        <option value="Arts">Arts</option>
+      </select>
+
+      <input type="text" name="place" placeholder="Place / Location" required>
+
+      <button type="submit">Submit 🎉</button>
     </form>
   </div>
+
+  <script>
+    // Generate stars
+    const starsContainer = document.getElementById('stars-container');
+    for(let i=0;i<30;i++){
+      const star=document.createElement('div');
+      star.className='star';
+      star.style.left=Math.random()*100+'vw';
+      star.style.width=star.style.height=(5+Math.random()*15)+'px';
+      star.style.animationDuration=(5+Math.random()*10)+'s';
+      starsContainer.appendChild(star);
+    }
+
+    // Form validation: prevent next if fields are not filled
+    const form = document.getElementById('studentForm');
+    form.addEventListener('submit', function(e){
+      const fields = form.querySelectorAll('input, select');
+      let valid = true;
+      fields.forEach(f => {
+        if(!f.value) valid = false;
+      });
+      if(!valid){
+        e.preventDefault();
+        alert('Please fill all fields before submitting!');
+      }
+    });
+  </script>
 </body>
 </html>

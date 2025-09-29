@@ -3,18 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Page</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Login Selection</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: "Poppins", sans-serif;
+      height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; overflow: hidden; text-align: center; position: relative;
+    }
+
+    /* Background gradient animation */
+    body::before {
+      content: ""; position: absolute; width: 200%; height: 200%;
+      background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffcc, #ff9900);
+      background-size: 800% 800%;
+      animation: moveGradient 20s ease infinite;
+      z-index: -2;
+    }
+    @keyframes moveGradient {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
+    }
+
+    /* Floating circles */
+    .circles { position:absolute; inset:0; overflow:hidden; z-index:-1; }
+    .circles li {
+      position:absolute; list-style:none; width:20px; height:20px;
+      background:rgba(255,255,255,.2);
+      animation:animate 25s linear infinite;
+      bottom:-150px; border-radius:50%;
+    }
+    .circles li:nth-child(1){left:25%;width:80px;height:80px;}
+    .circles li:nth-child(2){left:10%;animation-delay:2s;animation-duration:12s;}
+    .circles li:nth-child(3){left:70%;animation-delay:4s;}
+    .circles li:nth-child(4){left:40%;width:60px;height:60px;animation-duration:18s;}
+    .circles li:nth-child(6){left:75%;width:110px;height:110px;animation-delay:3s;}
+    .circles li:nth-child(7){left:35%;width:150px;height:150px;animation-delay:7s;}
+    .circles li:nth-child(10){left:85%;width:150px;height:150px;animation-duration:11s;}
+    @keyframes animate {
+      0%{transform:translateY(0) rotate(0);opacity:1;border-radius:0}
+      100%{transform:translateY(-1000px) rotate(720deg);opacity:0;border-radius:50%}
+    }
+
+    /* Card */
+    .card {
+      background: rgba(255,255,255,0.1);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(14px);
+      text-align:center;
+      width: 420px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      animation: slideUp 1.5s ease;
+      z-index:1;
+    }
+    .card h1 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      text-shadow: 0 0 12px #00fff7;
+    }
+    .card p { margin-bottom: 22px; font-size: 1rem; color: #eee; }
+
+    /* Fancy buttons */
+    .buttons { display:flex; flex-direction:column; gap:16px; }
+    .buttons button {
+      padding:14px 20px;
+      font-size:1.1rem;
+      border:none;
+      border-radius:50px;
+      background: linear-gradient(90deg, #ff00cc, #3333ff);
+      color:#fff;
+      font-weight:700;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      transition:all .3s ease;
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+    }
+
+    /* Glow effect */
+    .buttons button::before {
+      content:"";
+      position:absolute;
+      top:0; left:-100%;
+      width:100%; height:100%;
+      background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
+      transition:0.5s;
+    }
+    .buttons button:hover::before { left:100%; }
+    .buttons button:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px rgba(255,0,255,0.6), 0 0 30px rgba(0,255,255,0.6);
+    }
+
+    @keyframes slideUp {
+      from{opacity:0; transform:translateY(40px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white flex justify-center items-center h-screen">
-  <div class="bg-gray-800 p-8 rounded-xl shadow-lg text-center w-96">
-    <h1 class="text-2xl font-bold mb-6">Login</h1>
-    <form method="POST" action="{{ url_for('login') }}">
-      <div class="flex flex-col gap-4">
-        <button type="submit" class="btn bg-blue-600 py-2 rounded font-semibold hover:bg-blue-500">Student Login</button>
-        <button type="button" onclick="alert('Institution login coming soon!')" class="btn bg-green-600 py-2 rounded font-semibold hover:bg-green-500">Institution Login</button>
-      </div>
-    </form>
+<body>
+  <ul class="circles">
+    <li></li><li></li><li></li><li></li><li></li>
+    <li></li><li></li><li></li><li></li><li></li>
+  </ul>
+
+  <div class="card">
+    <h1>✨ Welcome to Task Logger ✨</h1>
+    <p>Choose your login type:</p>
+    <div class="buttons">
+      <button type="button" onclick="goToPage('student')">🎓 Student Login</button>
+      <button type="button" onclick="goToPage('institution')">🏫 Institution Login</button>
+    </div>
   </div>
+
+  <script>
+    function goToPage(type){
+      if(type === 'student'){
+        window.location.href = "/login?type=student";
+      } else {
+        window.location.href = "/login?type=institution";
+      }
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Colleges - SINCET</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-900 text-white">
+  <!-- Header -->
+  <header class="bg-gray-800 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <h1 class="text-xl font-bold">SINCET Colleges</h1>
+      <nav class="space-x-2">
+        <a href="{{ url_for('home') }}" class="px-3 py-2 rounded bg-blue-600 hover:bg-blue-500">Home</a>
+        <a href="{{ url_for('tenth') }}" class="px-3 py-2 rounded border border-white/30 hover:bg-white/10">10th Rec</a>
+        <a href="{{ url_for('twelfth') }}" class="px-3 py-2 rounded border border-white/30 hover:bg-white/10">12th Rec</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-b from-black to-gray-900">
+    <div class="max-w-6xl mx-auto px-4 py-10 md:py-16 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold">Explore Our College Institutions</h2>
+      <p class="mt-3 text-gray-300">Engineering, Arts & Science, Pharmacy, Law</p>
+    </div>
+  </section>
+
+  <!-- Listing -->
+  <main class="max-w-6xl mx-auto px-4 pb-16">
+    <div class="overflow-x-auto bg-gray-800 rounded-xl shadow">
+      <table class="min-w-full divide-y divide-gray-700">
+        <thead class="bg-gray-900/60">
+          <tr>
+            <th class="px-4 py-3 text-left text-sm font-semibold">Name</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold">Location</th>
+            <th class="px-4 py-3 text-left text-sm font-semibold">Fees (per year)</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-700">
+          <tr class="hover:bg-white/5">
+            <td class="px-4 py-3">SINCET Engineering College</td>
+            <td class="px-4 py-3">Trichy, Tamil Nadu</td>
+            <td class="px-4 py-3">₹75,000</td>
+          </tr>
+          <tr class="hover:bg-white/5">
+            <td class="px-4 py-3">SINCET Arts & Science College</td>
+            <td class="px-4 py-3">Thanjavur, Tamil Nadu</td>
+            <td class="px-4 py-3">₹45,000</td>
+          </tr>
+          <tr class="hover:bg-white/5">
+            <td class="px-4 py-3">SINCET College of Pharmacy</td>
+            <td class="px-4 py-3">Nagapattinam, Tamil Nadu</td>
+            <td class="px-4 py-3">₹85,000</td>
+          </tr>
+          <tr class="hover:bg-white/5">
+            <td class="px-4 py-3">SINCET School of Law</td>
+            <td class="px-4 py-3">Kumbakonam, Tamil Nadu</td>
+            <td class="px-4 py-3">₹65,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 py-6 text-center">
+    <p>&copy; 2025 SINC. All rights reserved.</p>
+  </footer>
+</body>
+</html>

@@ -49,6 +49,14 @@ def login():
     if request.method == 'POST':
         session['logged_in'] = True
         return redirect(url_for('student_login'))  # go to student selection page
+    # Support GET navigation via query param from templates: /login?type=student
+    login_type = request.args.get('type')
+    if login_type:
+        session['logged_in'] = True
+        if login_type == 'student':
+            return redirect(url_for('student_login'))
+        # Fallback for other types (e.g., institution) -> send to home for now
+        return redirect(url_for('home'))
     return render_template('login.html')
 
 # --- Student selection page (10th/12th) ---
@@ -56,6 +64,11 @@ def login():
 def student_login():
     if not session.get('logged_in'):
         return redirect(url_for('login'))
+
+    # Support GET navigation: /student_login?student_type=10th|12th
+    student_type_q = request.args.get('student_type')
+    if student_type_q in ['10th', '12th']:
+        return redirect(url_for('student_form', student_type=student_type_q))
 
     if request.method == 'POST':
         student_type = request.form.get('student_type')

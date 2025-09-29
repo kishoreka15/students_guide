@@ -1,42 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>12th Recommendation</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12th Recommendation – Cinematic Style</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* Animated gradient background */
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #4b6cb7);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  @keyframes gradientBG {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+  }
+
+  /* Floating particles */
+  .particle {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    animation: floatParticles 10s linear infinite;
+  }
+
+  @keyframes floatParticles {
+    0% {transform: translateY(0) translateX(0) scale(1);}
+    50% {transform: translateY(-200px) translateX(50px) scale(1.5);}
+    100% {transform: translateY(0) translateX(0) scale(1);}
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    max-width: 900px;
+    width: 100%;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .form-card {
+    flex: 1;
+    background: rgba(20, 20, 30, 0.9);
+    border-radius: 25px;
+    padding: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    color: #fff;
+    transition: transform 0.4s;
+    border: 2px solid #00ffff;
+  }
+
+  .form-card:hover {
+    transform: scale(1.05);
+    border-color: #ff00ff;
+  }
+
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #00ffff;
+    margin-bottom: 25px;
+    text-shadow: 0 0 15px #00ffff, 0 0 30px #ff00ff;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    box-shadow: inset 0 0 8px rgba(0,255,255,0.4);
+    transition: all 0.3s;
+  }
+
+  input[type="number"]:focus {
+    box-shadow: inset 0 0 12px #ff00ff;
+    background: rgba(255,255,255,0.2);
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #fff;
+    background: linear-gradient(90deg, #00ffff, #ff00ff);
+    transition: all 0.3s;
+    box-shadow: 0 5px 25px rgba(255,0,255,0.5);
+  }
+
+  button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 40px rgba(0,255,255,0.7);
+  }
+
+  @media(max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  }
+</style>
 </head>
-<body class="bg-gray-100 p-6">
-  <h1 class="text-3xl font-bold mb-6">12th Standard Department Recommendation</h1>
+<body>
 
-  <form method="POST" class="bg-white p-6 rounded-lg shadow max-w-lg mx-auto">
-    <label class="block mb-2">Physics Marks</label>
-    <input type="number" name="physics" min="0" max="100" required class="border p-2 w-full mb-4">
+<!-- Floating particles -->
+<script>
+  for(let i=0; i<30; i++){
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * window.innerWidth + 'px';
+    p.style.top = Math.random() * window.innerHeight + 'px';
+    p.style.width = p.style.height = Math.random()*10 + 5 + 'px';
+    p.style.animationDuration = 5 + Math.random()*10 + 's';
+    document.body.appendChild(p);
+  }
+</script>
 
-    <label class="block mb-2">Chemistry Marks</label>
-    <input type="number" name="chemistry" min="0" max="100" required class="border p-2 w-full mb-4">
+<div class="container">
 
-    <label class="block mb-2">Maths Marks</label>
-    <input type="number" name="maths" min="0" max="100" required class="border p-2 w-full mb-4">
-
-    <label class="block mb-2">Biology Marks</label>
-    <input type="number" name="biology" min="0" max="100" required class="border p-2 w-full mb-4">
-
-    <label class="block mb-2">English Marks</label>
-    <input type="number" name="english" min="0" max="100" required class="border p-2 w-full mb-4">
-
-    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Check Eligibility</button>
-  </form>
-
-  {% if departments %}
-  <div class="mt-8 bg-white p-6 rounded-lg shadow max-w-lg mx-auto">
-    <h2 class="text-2xl font-bold mb-4">Eligible Departments</h2>
-    <ul class="list-disc pl-6">
-      {% for dept in departments %}
-        <li>{{ dept }}</li>
-      {% endfor %}
-    </ul>
+  <div class="form-card">
+    <h1>🎬 12th Recommendation</h1>
+    <form method="POST">
+      <input type="number" name="physics" placeholder="Physics Marks" min="0" max="100" required>
+      <input type="number" name="chemistry" placeholder="Chemistry Marks" min="0" max="100" required>
+      <input type="number" name="maths" placeholder="Maths Marks" min="0" max="100" required>
+      <input type="number" name="biology" placeholder="Biology Marks" min="0" max="100" required>
+      <input type="number" name="english" placeholder="English Marks" min="0" max="100" required>
+      <button type="submit">Check Eligibility</button>
+    </form>
   </div>
-  {% endif %}
+
+</div>
 </body>
 </html>
