@@ -151,9 +151,10 @@
           <div class="text-2xl font-bold">{{ avg }}%</div>
         </div>
       </div>
-      <div class="mt-6 flex gap-3">
+      <div class="mt-6 flex gap-3 flex-wrap">
         <a href="{{ url_for('twelfth') }}" class="neon-btn">⬅ Back</a>
-        <a href="{{ url_for('colleges_page') }}?group={{ (eligible[0] if eligible and (eligible|length) > 0 else '') }}" class="neon-btn">🔍 Search College</a>
+        <a href="{{ url_for('schools') }}" class="neon-btn">🏫 Search Schools</a>
+        <a href="{{ url_for('colleges') }}" class="neon-btn">🔍 Search Colleges</a>
         <a href="{{ url_for('home') }}" class="neon-btn">🏠 Home</a>
       </div>
     </section>

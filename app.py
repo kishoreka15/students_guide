@@ -131,18 +131,33 @@ def tenth():
             bio = int(request.form.get('bio_interest', 0))
             commerce = int(request.form.get('commerce_interest', 0))
             marks = int(request.form.get('current_marks', 0))
+            department = request.form.get('department', '')
+            interests = request.form.getlist('interest')
 
+            # Determine recommendation
             if maths >= 4 and science >= 4 and bio >= 4 and marks >= 70:
-                recommended = 'bio_maths'
+                recommended = 'Bio-Maths Group'
+                reason = f'Strong interest in Maths({maths}), Science({science}), Biology({bio}) with {marks}% marks'
             elif maths >= 4 and science >= 4 and marks >= 65:
-                recommended = 'pure_science'
+                recommended = 'Pure Science Group'
+                reason = f'Strong interest in Maths({maths}) and Science({science}) with {marks}% marks'
             elif commerce >= 4 and marks >= 55:
-                recommended = 'commerce'
+                recommended = 'Commerce Group'
+                reason = f'Strong interest in Commerce({commerce}) with {marks}% marks'
             else:
-                recommended = 'Need improvement'
+                recommended = 'Need improvement in marks or interests'
+                reason = 'Consider improving your marks or exploring different interest areas'
 
-            stream_info = streams.get(recommended, {}) if recommended in streams else {}
-            return render_template('tenth.html', recommended=recommended, stream_info=stream_info)
+            return render_template('tenth_result.html', 
+                                   maths_interest=maths, 
+                                   science_interest=science,
+                                   bio_interest=bio, 
+                                   commerce_interest=commerce,
+                                   current_marks=marks,
+                                   recommended=recommended,
+                                   reason=reason,
+                                   selected_department=department,
+                                   selected_interests=', '.join(interests) if interests else 'None')
         except ValueError:
             return render_template('tenth.html', error="Enter valid numbers.")
 
@@ -163,28 +178,55 @@ def twelfth():
             english = int(request.form.get('english', 0))
 
             total = physics + chemistry + maths + biology + english
+            avg = round(total / 5, 2)
             pcm = physics + chemistry + maths
             pcb = physics + chemistry + biology
 
-            departments = []
+            eligible = []
+            reasons = []
+            
             if pcm >= 240 and maths >= 75 and physics >= 70:
-                departments.append('Engineering (B.Tech/B.E.)')
+                eligible.append('Engineering (B.Tech/B.E.)')
+                reasons.append(f'PCM={pcm}, Maths={maths}, Physics={physics}')
             if pcb >= 240 and biology >= 75 and chemistry >= 70:
-                departments.append('Medical (MBBS/BDS)')
+                eligible.append('Medical (MBBS/BDS)')
+                reasons.append(f'PCB={pcb}, Biology={biology}, Chemistry={chemistry}')
             if pcm >= 210 or pcb >= 210:
-                departments.append('B.Sc. Pure Sciences')
+                eligible.append('B.Sc. Pure Sciences')
+                reasons.append(f'PCM={pcm} or PCB={pcb}')
             if maths >= 60 and total >= 350:
-                departments.append('B.Com Commerce')
-                departments.append('Business Administration')
+                eligible.append('B.Com Commerce')
+                reasons.append(f'Maths={maths}, Total={total}')
+                eligible.append('Business Administration')
+                reasons.append(f'Maths={maths}, Total={total}')
             if total >= 300:
-                departments.append('Arts and Humanities')
-                departments.append('Social Sciences')
+                eligible.append('Arts and Humanities')
+                reasons.append(f'Total={total}')
+                eligible.append('Social Sciences')
+                reasons.append(f'Total={total}')
 
-            return render_template('twelfth.html', departments=departments)
+            return render_template('twelfth_result.html', 
+                                   physics=physics, chemistry=chemistry, 
+                                   maths=maths, biology=biology, english=english,
+                                   total=total, avg=avg, eligible=eligible, reasons=reasons)
         except ValueError:
             return render_template('twelfth.html', error="Enter valid numbers.")
 
     return render_template('twelfth.html')
+
+# --- Colleges Page ---
+@app.route('/colleges')
+def colleges():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('colleges.html')
+
+# --- Schools Page ---
+@app.route('/schools')
+def schools():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('schools.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

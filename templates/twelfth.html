@@ -153,6 +153,12 @@
       <input type="number" name="english" placeholder="English Marks" min="0" max="100" required>
       <button type="submit">Check Eligibility</button>
     </form>
+
+    {% if error %}
+      <div style="margin-top:16px; padding:12px; border-radius:12px; background:rgba(255,0,0,0.15); color:#ffb3b3;">
+        {{ error }}
+      </div>
+    {% endif %}
   </div>
 
 </div>

@@ -119,17 +119,10 @@
       <button type="submit">Get Recommendation 🎯</button>
     </form>
 
-    {% if recommended %}
-    <div class="recommendation">
-      <h2>Recommendation: {{ stream_info.name if stream_info else recommended }}</h2>
-      {% if stream_info %}
-        <p>{{ stream_info.description }}</p>
-        <p><strong>Subjects:</strong> {{ stream_info.subjects|join(', ') }}</p>
-        <p><strong>Careers:</strong> {{ stream_info.careers|join(', ') }}</p>
-        <p><strong>Department:</strong> {{ request.form.department }}</p>
-        <p><strong>Interests:</strong> {{ request.form.getlist('interest')|join(', ') }}</p>
-      {% endif %}
-    </div>
+    {% if error %}
+      <div style="margin-top:16px; padding:12px; border-radius:12px; background:rgba(255,0,0,0.15); color:#ffb3b3;">
+        {{ error }}
+      </div>
     {% endif %}
   </div>
 

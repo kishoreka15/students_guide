@@ -7,10 +7,31 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Montserrat', sans-serif; }
+    body { 
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+      min-height: 100vh;
+    }
+    .search-box {
+      transition: all 0.3s ease;
+    }
+    .search-box:focus {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    }
+    .school-card {
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+    }
+    .school-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      background: rgba(255,255,255,0.08);
+    }
   </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="text-white">
   <!-- Header -->
   <header class="bg-gray-800 sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -24,49 +45,103 @@
   </header>
 
   <!-- Hero -->
-  <section class="bg-gradient-to-b from-black to-gray-900">
+  <section class="bg-gradient-to-b from-black/50 to-transparent">
     <div class="max-w-6xl mx-auto px-4 py-10 md:py-16 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold">Our Schools</h2>
-      <p class="mt-3 text-gray-300">Browse schools with location and annual fees</p>
+      <h2 class="text-3xl md:text-4xl font-bold">🏫 Our Schools</h2>
+      <p class="mt-3 text-gray-300">Primary, Middle, High School & Matriculation</p>
+      
+      <!-- Search Box -->
+      <div class="mt-8 max-w-xl mx-auto">
+        <input 
+          type="text" 
+          id="searchBox" 
+          placeholder="🔍 Search by school name, location, or level..." 
+          class="search-box w-full px-6 py-3 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 outline-none"
+          onkeyup="filterSchools()"
+        />
+      </div>
     </div>
   </section>
 
   <!-- Listing -->
   <main class="max-w-6xl mx-auto px-4 pb-16">
-    <div class="overflow-x-auto bg-gray-800 rounded-xl shadow">
-      <table class="min-w-full divide-y divide-gray-700">
-        <thead class="bg-gray-900/60">
-          <tr>
-            <th class="px-4 py-3 text-left text-sm font-semibold">Name</th>
-            <th class="px-4 py-3 text-left text-sm font-semibold">Location</th>
-            <th class="px-4 py-3 text-left text-sm font-semibold">Fees (per year)</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-700">
-          <tr class="hover:bg-white/5">
-            <td class="px-4 py-3">SINCET Primary School</td>
-            <td class="px-4 py-3">Mayiladuthurai, Tamil Nadu</td>
-            <td class="px-4 py-3">₹15,000</td>
-          </tr>
-          <tr class="hover:bg-white/5">
-            <td class="px-4 py-3">SINCET Middle School</td>
-            <td class="px-4 py-3">Kumbakonam, Tamil Nadu</td>
-            <td class="px-4 py-3">₹22,000</td>
-          </tr>
-          <tr class="hover:bg-white/5">
-            <td class="px-4 py-3">SINCET High School</td>
-            <td class="px-4 py-3">Thanjavur, Tamil Nadu</td>
-            <td class="px-4 py-3">₹30,000</td>
-          </tr>
-          <tr class="hover:bg-white/5">
-            <td class="px-4 py-3">SINCET Matriculation School</td>
-            <td class="px-4 py-3">Trichy, Tamil Nadu</td>
-            <td class="px-4 py-3">₹28,000</td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="schoolGrid" class="grid md:grid-cols-2 gap-6">
+      
+      <!-- School Card 1 -->
+      <div class="school-card rounded-2xl p-6 border border-white/10" data-name="SINCET Primary School" data-location="Mayiladuthurai" data-level="Primary">
+        <h3 class="text-xl font-bold text-pink-400 mb-2">🎒 SINCET Primary School</h3>
+        <p class="text-gray-300 text-sm mb-3">📍 Mayiladuthurai, Tamil Nadu</p>
+        <div class="flex justify-between items-center">
+          <span class="text-green-400 font-semibold">₹15,000 / year</span>
+          <button onclick="alert('Contact: +91-XXXXXXXXXX')" class="px-4 py-2 bg-pink-600 hover:bg-pink-500 rounded-lg text-sm">Contact</button>
+        </div>
+        <p class="text-gray-400 text-xs mt-3">Grades: 1st to 5th | CBSE Board</p>
+      </div>
+
+      <!-- School Card 2 -->
+      <div class="school-card rounded-2xl p-6 border border-white/10" data-name="SINCET Middle School" data-location="Kumbakonam" data-level="Middle">
+        <h3 class="text-xl font-bold text-blue-400 mb-2">📚 SINCET Middle School</h3>
+        <p class="text-gray-300 text-sm mb-3">📍 Kumbakonam, Tamil Nadu</p>
+        <div class="flex justify-between items-center">
+          <span class="text-green-400 font-semibold">₹22,000 / year</span>
+          <button onclick="alert('Contact: +91-XXXXXXXXXX')" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm">Contact</button>
+        </div>
+        <p class="text-gray-400 text-xs mt-3">Grades: 6th to 8th | State Board</p>
+      </div>
+
+      <!-- School Card 3 -->
+      <div class="school-card rounded-2xl p-6 border border-white/10" data-name="SINCET High School" data-location="Thanjavur" data-level="High">
+        <h3 class="text-xl font-bold text-yellow-400 mb-2">🎓 SINCET High School</h3>
+        <p class="text-gray-300 text-sm mb-3">📍 Thanjavur, Tamil Nadu</p>
+        <div class="flex justify-between items-center">
+          <span class="text-green-400 font-semibold">₹30,000 / year</span>
+          <button onclick="alert('Contact: +91-XXXXXXXXXX')" class="px-4 py-2 bg-yellow-600 hover:bg-yellow-500 rounded-lg text-sm">Contact</button>
+        </div>
+        <p class="text-gray-400 text-xs mt-3">Grades: 9th to 10th | CBSE Board</p>
+      </div>
+
+      <!-- School Card 4 -->
+      <div class="school-card rounded-2xl p-6 border border-white/10" data-name="SINCET Matriculation School" data-location="Trichy" data-level="Matriculation">
+        <h3 class="text-xl font-bold text-purple-400 mb-2">🏆 SINCET Matriculation School</h3>
+        <p class="text-gray-300 text-sm mb-3">📍 Trichy, Tamil Nadu</p>
+        <div class="flex justify-between items-center">
+          <span class="text-green-400 font-semibold">₹28,000 / year</span>
+          <button onclick="alert('Contact: +91-XXXXXXXXXX')" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-lg text-sm">Contact</button>
+        </div>
+        <p class="text-gray-400 text-xs mt-3">Grades: 1st to 12th | Matriculation Board</p>
+      </div>
+
+    </div>
+
+    <!-- No Results Message -->
+    <div id="noResults" class="hidden text-center py-12">
+      <p class="text-gray-400 text-lg">No schools found matching your search.</p>
     </div>
   </main>
+
+  <script>
+    function filterSchools() {
+      const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+      const cards = document.querySelectorAll('.school-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        const location = card.getAttribute('data-location').toLowerCase();
+        const level = card.getAttribute('data-level').toLowerCase();
+        const text = card.textContent.toLowerCase();
+
+        if (name.includes(searchTerm) || location.includes(searchTerm) || level.includes(searchTerm) || text.includes(searchTerm)) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('noResults').classList.toggle('hidden', visibleCount > 0);
+    }
+  </script>
 
   <!-- Footer -->
   <footer class="bg-black text-gray-400 py-6 text-center">
