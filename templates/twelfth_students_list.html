@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12th Students List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+  </style>
+</head>
+<body class="p-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="glass rounded-2xl p-6 mb-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-3xl font-bold text-white mb-2">🎓 12th Standard Students</h1>
+          <p class="text-gray-200">Total Students: {{ students|length }}</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="{{ url_for('institution_dashboard') }}" class="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition">⬅ Back</a>
+          <a href="{{ url_for('logout') }}" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition">Logout</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Students Table -->
+    <div class="glass rounded-2xl p-6 overflow-x-auto">
+      {% if students and students|length > 0 %}
+        <table class="w-full text-white">
+          <thead>
+            <tr class="border-b border-white/30">
+              <th class="text-left py-3 px-4">#</th>
+              <th class="text-left py-3 px-4">Name</th>
+              <th class="text-left py-3 px-4">Email</th>
+              <th class="text-left py-3 px-4">Phone</th>
+              <th class="text-left py-3 px-4">Interest</th>
+              <th class="text-left py-3 px-4">Department</th>
+              <th class="text-left py-3 px-4">Place</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for student in students %}
+              <tr class="border-b border-white/20 hover:bg-white/10 transition">
+                <td class="py-3 px-4">{{ loop.index }}</td>
+                <td class="py-3 px-4">{{ student.Name }}</td>
+                <td class="py-3 px-4">{{ student.Email }}</td>
+                <td class="py-3 px-4">{{ student.Phone }}</td>
+                <td class="py-3 px-4">{{ student.Interest }}</td>
+                <td class="py-3 px-4">{{ student.Department }}</td>
+                <td class="py-3 px-4">{{ student.Place }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <div class="text-center text-white py-8">
+          <p class="text-xl">No students registered yet.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

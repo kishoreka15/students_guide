@@ -41,6 +41,7 @@ def home():
 @app.route('/logout')
 def logout():
     session.clear()
+    flash('You have been logged out successfully.')
     return redirect(url_for('login'))
 
 # --- Login page ---
@@ -52,12 +53,74 @@ def login():
     # Support GET navigation via query param from templates: /login?type=student
     login_type = request.args.get('type')
     if login_type:
-        session['logged_in'] = True
         if login_type == 'student':
+            session['logged_in'] = True
             return redirect(url_for('student_login'))
-        # Fallback for other types (e.g., institution) -> send to home for now
-        return redirect(url_for('home'))
+        elif login_type == 'institution':
+            return redirect(url_for('institution_login'))
     return render_template('login.html')
+
+# --- Institution Login ---
+@app.route('/institution_login', methods=['GET', 'POST'])
+def institution_login():
+    if request.method == 'POST':
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '').strip()
+        
+        # Simple authentication (you can enhance this with a database)
+        if email == 'admin@institution.com' and password == 'admin123':
+            session['institution_logged_in'] = True
+            session['institution_email'] = email
+            return redirect(url_for('institution_dashboard'))
+        else:
+            return render_template('institution_login.html', error='Invalid email or password')
+    
+    return render_template('institution_login.html')
+
+# --- Institution Dashboard ---
+@app.route('/institution_dashboard')
+def institution_dashboard():
+    if not session.get('institution_logged_in'):
+        return redirect(url_for('institution_login'))
+    return render_template('institution_dashboard.html')
+
+# --- View 10th Students ---
+@app.route('/view_tenth_students')
+def view_tenth_students():
+    if not session.get('institution_logged_in'):
+        return redirect(url_for('institution_login'))
+    
+    students = []
+    csv_file = 'tenth_students.csv'
+    
+    if os.path.isfile(csv_file):
+        try:
+            with open(csv_file, 'r', newline='') as f:
+                reader = csv.DictReader(f)
+                students = list(reader)
+        except Exception as e:
+            flash(f'Error reading file: {str(e)}')
+    
+    return render_template('tenth_students_list.html', students=students)
+
+# --- View 12th Students ---
+@app.route('/view_twelfth_students')
+def view_twelfth_students():
+    if not session.get('institution_logged_in'):
+        return redirect(url_for('institution_login'))
+    
+    students = []
+    csv_file = 'twelfth_students.csv'
+    
+    if os.path.isfile(csv_file):
+        try:
+            with open(csv_file, 'r', newline='') as f:
+                reader = csv.DictReader(f)
+                students = list(reader)
+        except Exception as e:
+            flash(f'Error reading file: {str(e)}')
+    
+    return render_template('twelfth_students_list.html', students=students)
 
 # --- Student selection page (10th/12th) ---
 @app.route('/student_login', methods=['GET', 'POST'])

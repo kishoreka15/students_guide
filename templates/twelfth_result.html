@@ -152,12 +152,29 @@
         </div>
       </div>
       <div class="mt-6">
-        <h3 class="text-sm font-semibold text-gray-300 mb-3">🎓 Search Colleges by Stream:</h3>
+        <h3 class="text-sm font-semibold text-gray-300 mb-3">🎓 Search Colleges for Your Streams:</h3>
         <div class="grid grid-cols-2 gap-2 mb-4">
-          <a href="{{ url_for('engineering_colleges') }}" class="px-3 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 transition text-sm text-center">⚙️ Engineering</a>
-          <a href="{{ url_for('medical_colleges') }}" class="px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 transition text-sm text-center">🏥 Medical</a>
-          <a href="{{ url_for('commerce_colleges') }}" class="px-3 py-2 rounded-lg bg-orange-600 hover:bg-orange-500 transition text-sm text-center">💼 Commerce</a>
-          <a href="{{ url_for('arts_science_colleges') }}" class="px-3 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 transition text-sm text-center">🎨 Arts & Science</a>
+          {% if eligible and eligible|length > 0 %}
+            {% for item in eligible %}
+              {% if 'Engineering' in item or 'B.Tech' in item or 'B.E.' in item %}
+                <a href="{{ url_for('engineering_colleges') }}" class="px-3 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 transition text-sm text-center">⚙️ Engineering</a>
+              {% endif %}
+              {% if 'Medical' in item or 'MBBS' in item or 'BDS' in item %}
+                <a href="{{ url_for('medical_colleges') }}" class="px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 transition text-sm text-center">🏥 Medical</a>
+              {% endif %}
+              {% if 'Commerce' in item or 'B.Com' in item or 'Business' in item %}
+                <a href="{{ url_for('commerce_colleges') }}" class="px-3 py-2 rounded-lg bg-orange-600 hover:bg-orange-500 transition text-sm text-center">💼 Commerce</a>
+              {% endif %}
+              {% if 'Arts' in item or 'B.Sc' in item or 'Sciences' in item or 'Social' in item %}
+                <a href="{{ url_for('arts_science_colleges') }}" class="px-3 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 transition text-sm text-center">🎨 Arts & Science</a>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <a href="{{ url_for('engineering_colleges') }}" class="px-3 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 transition text-sm text-center">⚙️ Engineering</a>
+            <a href="{{ url_for('medical_colleges') }}" class="px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 transition text-sm text-center">🏥 Medical</a>
+            <a href="{{ url_for('commerce_colleges') }}" class="px-3 py-2 rounded-lg bg-orange-600 hover:bg-orange-500 transition text-sm text-center">💼 Commerce</a>
+            <a href="{{ url_for('arts_science_colleges') }}" class="px-3 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 transition text-sm text-center">🎨 Arts & Science</a>
+          {% endif %}
         </div>
         <div class="flex gap-3 flex-wrap">
           <a href="{{ url_for('twelfth') }}" class="neon-btn">⬅ Back</a>

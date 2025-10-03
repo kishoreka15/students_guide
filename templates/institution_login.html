@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Institution Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+  </style>
+</head>
+<body>
+  <div class="glass rounded-2xl p-8 w-full max-w-md">
+    <h1 class="text-3xl font-bold text-white mb-6 text-center">🏫 Institution Login</h1>
+    
+    <form method="POST" class="space-y-4">
+      <div>
+        <label class="block text-white mb-2">Email ID</label>
+        <input type="email" name="email" required 
+               class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:border-white"
+               placeholder="Enter your email">
+      </div>
+      
+      <div>
+        <label class="block text-white mb-2">Password</label>
+        <input type="password" name="password" required 
+               class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:border-white"
+               placeholder="Enter your password">
+      </div>
+
+      {% if error %}
+        <div class="bg-red-500/20 border border-red-500 text-white px-4 py-3 rounded-lg">
+          {{ error }}
+        </div>
+      {% endif %}
+
+      <button type="submit" 
+              class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 rounded-lg hover:from-purple-600 hover:to-pink-600 transition duration-300">
+        Login
+      </button>
+    </form>
+
+    <div class="mt-6 text-center">
+      <a href="{{ url_for('login') }}" class="text-white hover:underline">← Back to Login Selection</a>
+    </div>
+  </div>
+</body>
+</html>

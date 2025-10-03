@@ -108,12 +108,22 @@
         </div>
       </div>
       <div class="mt-6">
-        <h3 class="text-sm font-semibold text-gray-300 mb-3">🏫 Search Schools by Stream:</h3>
-        <div class="grid grid-cols-2 gap-2 mb-4">
-          <a href="{{ url_for('biomath_schools') }}" class="px-3 py-2 rounded-lg bg-pink-600 hover:bg-pink-500 transition text-sm text-center">🧬 Bio-Math</a>
-          <a href="{{ url_for('cs_schools') }}" class="px-3 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 transition text-sm text-center">💻 Computer Science</a>
-          <a href="{{ url_for('purescience_schools') }}" class="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 transition text-sm text-center">🔬 Pure Science</a>
-          <a href="{{ url_for('accounts_schools') }}" class="px-3 py-2 rounded-lg bg-orange-600 hover:bg-orange-500 transition text-sm text-center">📊 Accounts</a>
+        <h3 class="text-sm font-semibold text-gray-300 mb-3">🏫 Search Schools for Your Stream:</h3>
+        <div class="mb-4">
+          {% if 'Bio-Maths' in recommended or 'Bio-Math' in recommended %}
+            <a href="{{ url_for('biomath_schools') }}" class="block px-4 py-3 rounded-lg bg-pink-600 hover:bg-pink-500 transition text-center font-semibold">🧬 Search Bio-Math Schools</a>
+          {% elif 'Pure Science' in recommended %}
+            <a href="{{ url_for('purescience_schools') }}" class="block px-4 py-3 rounded-lg bg-blue-600 hover:bg-blue-500 transition text-center font-semibold">🔬 Search Pure Science Schools</a>
+          {% elif 'Commerce' in recommended %}
+            <a href="{{ url_for('accounts_schools') }}" class="block px-4 py-3 rounded-lg bg-orange-600 hover:bg-orange-500 transition text-center font-semibold">📊 Search Commerce/Accounts Schools</a>
+          {% else %}
+            <div class="grid grid-cols-2 gap-2">
+              <a href="{{ url_for('biomath_schools') }}" class="px-3 py-2 rounded-lg bg-pink-600 hover:bg-pink-500 transition text-sm text-center">🧬 Bio-Math</a>
+              <a href="{{ url_for('cs_schools') }}" class="px-3 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 transition text-sm text-center">💻 Computer Science</a>
+              <a href="{{ url_for('purescience_schools') }}" class="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 transition text-sm text-center">🔬 Pure Science</a>
+              <a href="{{ url_for('accounts_schools') }}" class="px-3 py-2 rounded-lg bg-orange-600 hover:bg-orange-500 transition text-sm text-center">📊 Accounts</a>
+            </div>
+          {% endif %}
         </div>
         <div class="flex gap-3 flex-wrap">
           <a href="{{ url_for('tenth') }}" class="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 transition">⬅ Back</a>
