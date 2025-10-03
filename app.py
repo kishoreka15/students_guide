@@ -228,5 +228,71 @@ def schools():
         return redirect(url_for('login'))
     return render_template('schools.html')
 
+# --- Stream-specific School Pages ---
+@app.route('/biomath_schools')
+def biomath_schools():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('biomath_schools.html')
+
+@app.route('/cs_schools')
+def cs_schools():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('cs_schools.html')
+
+@app.route('/purescience_schools')
+def purescience_schools():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('purescience_schools.html')
+
+@app.route('/accounts_schools')
+def accounts_schools():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('accounts_schools.html')
+
+# --- Tenth Result Page (for back navigation) ---
+@app.route('/tenth_result')
+def tenth_result_page():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    # Redirect to tenth form if accessed directly without data
+    return redirect(url_for('tenth'))
+
+# --- Stream-specific College Pages ---
+@app.route('/engineering_colleges')
+def engineering_colleges():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('engineering_colleges.html')
+
+@app.route('/medical_colleges')
+def medical_colleges():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('medical_colleges.html')
+
+@app.route('/commerce_colleges')
+def commerce_colleges():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('commerce_colleges.html')
+
+@app.route('/arts_science_colleges')
+def arts_science_colleges():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('arts_science_colleges.html')
+
+# --- Twelfth Result Page (for back navigation) ---
+@app.route('/twelfth_result')
+def twelfth_result_page():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    # Redirect to twelfth form if accessed directly without data
+    return redirect(url_for('twelfth'))
+
 if __name__ == '__main__':
     app.run(debug=True)

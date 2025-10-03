@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accounts/Commerce Schools</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body { 
+      font-family: 'Montserrat', sans-serif; 
+      min-height: 100vh; 
+      margin: 0; 
+      color: #fff;
+      background: linear-gradient(270deg, #f093fb, #f5576c, #ffd89b, #19547b);
+      background-size: 600% 600%;
+      animation: gradientMove 20s ease infinite;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .glass { 
+      background: rgba(255,255,255,0.08); 
+      backdrop-filter: blur(15px); 
+      border: 1px solid rgba(255,255,255,0.2); 
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      transition: all 0.3s ease;
+    }
+    .glass:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    }
+    .school-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+    }
+    .school-card:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateX(5px);
+    }
+  </style>
+</head>
+<body class="p-6">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="glass rounded-2xl p-6 mb-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h1 class="text-4xl font-bold text-orange-300 mb-2">📊 Accounts/Commerce Schools</h1>
+          <p class="text-gray-200">Schools offering Commerce & Accounts stream</p>
+        </div>
+        <div class="flex gap-3">
+          <a href="{{ url_for('tenth_result_page') }}" class="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 transition">⬅ Back</a>
+          <a href="{{ url_for('home') }}" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 transition">🏠 Home</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="glass rounded-2xl p-4 mb-6">
+      <input type="text" id="searchInput" placeholder="🔍 Search schools by name or location..." 
+             class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/30 text-white placeholder-gray-300 focus:outline-none focus:border-orange-400">
+    </div>
+
+    <!-- Schools Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="schoolsGrid">
+      <!-- School 1 -->
+      <div class="school-card rounded-xl p-5" data-name="Lady Andal Venkatasubba Rao Matriculation" data-location="Chennai">
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="text-xl font-bold text-yellow-300">Lady Andal Venkatasubba Rao Matriculation</h3>
+          <span class="px-3 py-1 bg-green-600 rounded-full text-xs">Top Rated</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">📍 Chennai, Tamil Nadu</p>
+        <div class="bg-white/10 rounded-lg p-3 mb-3">
+          <div class="text-sm text-gray-300">Annual Fees</div>
+          <div class="text-2xl font-bold text-green-300">₹40,000</div>
+        </div>
+        <div class="space-y-2 text-sm text-gray-200">
+          <div>✓ Strong commerce faculty</div>
+          <div>✓ CA foundation coaching</div>
+          <div>✓ Business studies focus</div>
+        </div>
+        <button class="mt-4 w-full py-2 bg-orange-600 hover:bg-orange-500 rounded-lg transition">Contact School</button>
+      </div>
+
+      <!-- School 2 -->
+      <div class="school-card rounded-xl p-5" data-name="Padma Seshadri Bala Bhavan" data-location="Chennai">
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="text-xl font-bold text-yellow-300">Padma Seshadri Bala Bhavan</h3>
+          <span class="px-3 py-1 bg-green-600 rounded-full text-xs">Top Rated</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">📍 Chennai, Tamil Nadu</p>
+        <div class="bg-white/10 rounded-lg p-3 mb-3">
+          <div class="text-sm text-gray-300">Annual Fees</div>
+          <div class="text-2xl font-bold text-green-300">₹58,000</div>
+        </div>
+        <div class="space-y-2 text-sm text-gray-200">
+          <div>✓ Premium commerce education</div>
+          <div>✓ Accounting excellence</div>
+          <div>✓ Business workshops</div>
+        </div>
+        <button class="mt-4 w-full py-2 bg-orange-600 hover:bg-orange-500 rounded-lg transition">Contact School</button>
+      </div>
+
+      <!-- School 3 -->
+      <div class="school-card rounded-xl p-5" data-name="Don Bosco Matriculation School" data-location="Chennai">
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="text-xl font-bold text-yellow-300">Don Bosco Matriculation School</h3>
+          <span class="px-3 py-1 bg-blue-600 rounded-full text-xs">CBSE</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">📍 Chennai, Tamil Nadu</p>
+        <div class="bg-white/10 rounded-lg p-3 mb-3">
+          <div class="text-sm text-gray-300">Annual Fees</div>
+          <div class="text-2xl font-bold text-green-300">₹35,000</div>
+        </div>
+        <div class="space-y-2 text-sm text-gray-200">
+          <div>✓ Commerce with maths</div>
+          <div>✓ Economics specialization</div>
+          <div>✓ Banking awareness</div>
+        </div>
+        <button class="mt-4 w-full py-2 bg-orange-600 hover:bg-orange-500 rounded-lg transition">Contact School</button>
+      </div>
+
+      <!-- School 4 -->
+      <div class="school-card rounded-xl p-5" data-name="St. Mary's Anglo Indian School" data-location="Coimbatore">
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="text-xl font-bold text-yellow-300">St. Mary's Anglo Indian School</h3>
+          <span class="px-3 py-1 bg-green-600 rounded-full text-xs">Top Rated</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">📍 Coimbatore, Tamil Nadu</p>
+        <div class="bg-white/10 rounded-lg p-3 mb-3">
+          <div class="text-sm text-gray-300">Annual Fees</div>
+          <div class="text-2xl font-bold text-green-300">₹32,000</div>
+        </div>
+        <div class="space-y-2 text-sm text-gray-200">
+          <div>✓ Accounts & finance focus</div>
+          <div>✓ Business management</div>
+          <div>✓ Entrepreneurship training</div>
+        </div>
+        <button class="mt-4 w-full py-2 bg-orange-600 hover:bg-orange-500 rounded-lg transition">Contact School</button>
+      </div>
+
+      <!-- School 5 -->
+      <div class="school-card rounded-xl p-5" data-name="Asan Memorial Senior Secondary School" data-location="Chennai">
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="text-xl font-bold text-yellow-300">Asan Memorial Senior Secondary School</h3>
+          <span class="px-3 py-1 bg-blue-600 rounded-full text-xs">CBSE</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">📍 Chennai, Tamil Nadu</p>
+        <div class="bg-white/10 rounded-lg p-3 mb-3">
+          <div class="text-sm text-gray-300">Annual Fees</div>
+          <div class="text-2xl font-bold text-green-300">₹45,000</div>
+        </div>
+        <div class="space-y-2 text-sm text-gray-200">
+          <div>✓ Commerce excellence</div>
+          <div>✓ CA/CS preparation</div>
+          <div>✓ Financial literacy</div>
+        </div>
+        <button class="mt-4 w-full py-2 bg-orange-600 hover:bg-orange-500 rounded-lg transition">Contact School</button>
+      </div>
+
+      <!-- School 6 -->
+      <div class="school-card rounded-xl p-5" data-name="Bhavan's Rajaji Vidyashram" data-location="Chennai">
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="text-xl font-bold text-yellow-300">Bhavan's Rajaji Vidyashram</h3>
+          <span class="px-3 py-1 bg-green-600 rounded-full text-xs">Top Rated</span>
+        </div>
+        <p class="text-gray-300 text-sm mb-2">📍 Chennai, Tamil Nadu</p>
+        <div class="bg-white/10 rounded-lg p-3 mb-3">
+          <div class="text-sm text-gray-300">Annual Fees</div>
+          <div class="text-2xl font-bold text-green-300">₹38,000</div>
+        </div>
+        <div class="space-y-2 text-sm text-gray-200">
+          <div>✓ Commerce stream expert</div>
+          <div>✓ Accounting software training</div>
+          <div>✓ Business internships</div>
+        </div>
+        <button class="mt-4 w-full py-2 bg-orange-600 hover:bg-orange-500 rounded-lg transition">Contact School</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      const schools = document.querySelectorAll('.school-card');
+      
+      schools.forEach(school => {
+        const name = school.dataset.name.toLowerCase();
+        const location = school.dataset.location.toLowerCase();
+        
+        if (name.includes(searchTerm) || location.includes(searchTerm)) {
+          school.style.display = 'block';
+        } else {
+          school.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
