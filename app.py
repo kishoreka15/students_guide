@@ -120,17 +120,27 @@ def institution_login():
         data_folder = 'data'
         csv_file = os.path.join(data_folder, 'institutions.csv')
         
-        if os.path.isfile(csv_file):
-            with open(csv_file, 'r', newline='') as f:
+        if not os.path.isfile(csv_file):
+            return render_template('institution_login.html', error='Institution credentials file not found. Please contact administrator.')
+        
+        try:
+            with open(csv_file, 'r', newline='', encoding='utf-8') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    if row['Email'] == email and row['Password'] == password:
+                    # Strip whitespace from CSV values
+                    csv_email = row['Email'].strip()
+                    csv_password = row['Password'].strip()
+                    
+                    if csv_email == email and csv_password == password:
                         session['institution_logged_in'] = True
                         session['institution_email'] = email
-                        session['institution_name'] = row['InstitutionName']
+                        session['institution_name'] = row['InstitutionName'].strip()
+                        flash('Login successful!')
                         return redirect(url_for('institution_dashboard'))
+        except Exception as e:
+            return render_template('institution_login.html', error=f'Error reading credentials: {str(e)}')
         
-        return render_template('institution_login.html', error='Invalid email or password')
+        return render_template('institution_login.html', error='Invalid email or password. Please check your credentials.')
     
     return render_template('institution_login.html')
 
