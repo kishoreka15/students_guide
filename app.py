@@ -60,6 +60,55 @@ def login():
             return redirect(url_for('institution_login'))
     return render_template('login.html')
 
+# --- Institution Registration ---
+@app.route('/institution_register', methods=['GET', 'POST'])
+def institution_register():
+    if request.method == 'POST':
+        institution_name = request.form.get('institution_name', '').strip()
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '').strip()
+        confirm_password = request.form.get('confirm_password', '').strip()
+        phone = request.form.get('phone', '').strip()
+        
+        # Validation
+        if not all([institution_name, email, password, phone]):
+            return render_template('institution_register.html', error='All fields are required')
+        
+        if password != confirm_password:
+            return render_template('institution_register.html', error='Passwords do not match')
+        
+        if len(password) < 6:
+            return render_template('institution_register.html', error='Password must be at least 6 characters')
+        
+        # Create data folder if it doesn't exist
+        data_folder = 'data'
+        if not os.path.exists(data_folder):
+            os.makedirs(data_folder)
+        
+        # Check if email already exists
+        csv_file = os.path.join(data_folder, 'institutions.csv')
+        if os.path.isfile(csv_file):
+            with open(csv_file, 'r', newline='') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    if row['Email'] == email:
+                        return render_template('institution_register.html', error='Email already registered')
+        
+        # Save to CSV in data folder
+        file_exists = os.path.isfile(csv_file)
+        try:
+            with open(csv_file, 'a', newline='') as f:
+                writer = csv.writer(f)
+                if not file_exists:
+                    writer.writerow(['InstitutionName', 'Email', 'Password', 'Phone'])
+                writer.writerow([institution_name, email, password, phone])
+            
+            return render_template('institution_register.html', success='Registration successful! Please login.')
+        except Exception as e:
+            return render_template('institution_register.html', error=f'Error saving data: {str(e)}')
+    
+    return render_template('institution_register.html')
+
 # --- Institution Login ---
 @app.route('/institution_login', methods=['GET', 'POST'])
 def institution_login():
@@ -67,13 +116,21 @@ def institution_login():
         email = request.form.get('email', '').strip()
         password = request.form.get('password', '').strip()
         
-        # Simple authentication (you can enhance this with a database)
-        if email == 'admin@institution.com' and password == 'admin123':
-            session['institution_logged_in'] = True
-            session['institution_email'] = email
-            return redirect(url_for('institution_dashboard'))
-        else:
-            return render_template('institution_login.html', error='Invalid email or password')
+        # Check credentials from CSV file in data folder
+        data_folder = 'data'
+        csv_file = os.path.join(data_folder, 'institutions.csv')
+        
+        if os.path.isfile(csv_file):
+            with open(csv_file, 'r', newline='') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    if row['Email'] == email and row['Password'] == password:
+                        session['institution_logged_in'] = True
+                        session['institution_email'] = email
+                        session['institution_name'] = row['InstitutionName']
+                        return redirect(url_for('institution_dashboard'))
+        
+        return render_template('institution_login.html', error='Invalid email or password')
     
     return render_template('institution_login.html')
 
